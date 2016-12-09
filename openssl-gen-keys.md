@@ -9,7 +9,7 @@ openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
 - <https://www.openssl.org/docs/apps/req.html>
 
 
-** Извлечение открытого ключа из пары закрытого/открытого: **
+**Извлечение открытого ключа из пары закрытого/открытого:**
 
 ```bash
 openssl rsa -in key.pem -pubout -out pubkey.pem
