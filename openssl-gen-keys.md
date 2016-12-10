@@ -16,3 +16,10 @@ openssl rsa -in key.pem -pubout -out pubkey.pem
 ```
 
 - <https://stackoverflow.com/questions/5244129/use-rsa-private-key-to-generate-public-key>
+
+
+**Удаление пароля закрытого ключа**
+
+```
+openssl rsa -in key.pem -out privkey.pem
+```
