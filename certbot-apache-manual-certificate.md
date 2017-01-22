@@ -1,21 +1,21 @@
 
-Установка Letsencrypt SSL-сертификата в Debian 8 (jessie)
+#Установка Let's Encrypt SSL сертификата в Debian 8
 
-```bash
+```shell
 apt-get install python-certbot-apache -t jessie-backports
 ```
 
-Для доменов 
+Для нескольких доменов (с *www* и *без www*):
 
-```bash
+```shell
 certbot certonly -n -d example.com -d www.example.com
 ```
 
-```bash
+```shell
 certbot -d example.com -d www.example.com --manual --preferred-challenges dns certonly
 ```
 
-```
+```shell
 cd /etc/apt/sources.list.d/
 echo 'deb http://ftp.debian.org/debian jessie-backports main' >> backports.list
 ```
