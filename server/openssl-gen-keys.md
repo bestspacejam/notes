@@ -1,12 +1,13 @@
 # Генерация закрытого ключа и сертификата
-Сетификат подписывается сгенерированным ключом
+
+*Сетификат подписывается сгенерированным ключом*
 
 ```bash
 openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
 ```
 
-- <https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl>
-- <https://www.openssl.org/docs/apps/req.html>
+- [How to create a self-signed certificate with openssl?](https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl)
+- [Опции параметра "openssl req"](https://linux.die.net/man/1/req)
 
 
 **Извлечение открытого ключа из пары закрытого/открытого:**
@@ -15,7 +16,7 @@ openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
 openssl rsa -in key.pem -pubout -out pubkey.pem
 ```
 
-- <https://stackoverflow.com/questions/5244129/use-rsa-private-key-to-generate-public-key>
+- [Use RSA private key to generate public key?](https://stackoverflow.com/questions/5244129/use-rsa-private-key-to-generate-public-key)
 
 
 **Удаление пароля закрытого ключа:**
