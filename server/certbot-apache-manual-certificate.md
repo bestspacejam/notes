@@ -24,11 +24,17 @@ certbot certonly -d example.com -d www.example.com --manual --preferred-challeng
 ## Обновление сертификата
 
 ```shell
-certbot certonly -d example.com -d www.example.com --manual --keep-until-expiring --agree-tos --manual-public-ip-logging-ok --preferred-challenges dns
+certbot certonly -d example.com -d www.example.com --manual --keep-until-expiring --agree-tos --preferred-challenges dns
 # Перезагрузка сервера для подключения обновлённых файлов
 apachectl graceful
 ```
 Опция `--dry-run` позволяет проверить запрос без фактического обновления файлов сертификатов
+
+`--manual` &mdash; ручное обновление сертификата
+`--keep-until-expiring` &mdash; оставить текущий сертификат если он не требует обновления
+`--agree-tos` &mdash; принять пользовательское соглашение
+`--preferred-challenges` &mdash; режим подтверждения владения указанными доменами (значения http, dns)
+`--text` &mdash; текстовый режим, без графического интерфейса
 
 Использование Certbot:
 <https://certbot.eff.org/docs/using.html>
