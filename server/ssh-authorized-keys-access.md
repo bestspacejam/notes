@@ -30,17 +30,25 @@ ssh-keygen -R <hostname>
 ### Как получить ключ удалённого хоста
 
 
+[Вариант 1](https://superuser.com/a/1111974):
+
 ```shell
 $ ssh-keyscan -t rsa -H bitbucket.org >> ~/.ssh/known_hosts
 ```
 
-([ссылка на superuser](https://superuser.com/a/1111974))
+
+[Вариант 2](https://stackoverflow.com/a/25020638):
+
+```shell
+if [ -z `ssh-keygen -F $IP` ]; then
+  ssh-keyscan -H $IP >> ~/.ssh/known_hosts
+fi
+```
 
 
 ## На удалённом хосте
 
 1. **Загрузить "sshkey.pem.pub"**
-
 2. **Создать файл "authorized_keys", если ещё не создан.**
 	**Внимание!** Команды должны выполняться из под пользователя к которому необходимо предоставить доступ по SSH.
 	
@@ -51,7 +59,6 @@ $ ssh-keyscan -t rsa -H bitbucket.org >> ~/.ssh/known_hosts
 	chmod 700 ~/.ssh
 	chmod 600 ~/.ssh/authorized_keys
 	```
-	
 3. **Добавить публичный ключ в "authorized_keys"**
 
 	```shell
@@ -62,7 +69,34 @@ $ ssh-keyscan -t rsa -H bitbucket.org >> ~/.ssh/known_hosts
 
 В случае проблем с аутентификацией смотреть `tail -f /var/log/auth.log`
 
-	
+
+### Как обновить ключи сервера
+
+Бывает полезно при клонировании виртуальной машины
+
+
+1. Удалить файлы ключей
+
+```
+# /bin/rm -v /etc/ssh/ssh_host_*
+```
+2. Перекофигурировать SSH сервер
+
+```
+# dpkg-reconfigure openssh-server
+```
+3. Перезапустить SSH сервер
+```
+$ /etc/init.d/ssh restart
+```
+
+
+На клиенте необходимо сбросить загруженный ключ для этого хоста
+
+
+* [Ubuntu / Debian Linux Regenerate OpenSSH Host Keys](https://www.cyberciti.biz/faq/howto-regenerate-openssh-host-keys/)
+
+
 ## Ссылки
 
 * [Use Public Key Authentication with SSH](https://www.linode.com/docs/security/use-public-key-authentication-with-ssh) &mdash; вроде неплохой мануал
