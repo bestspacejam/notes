@@ -38,7 +38,14 @@
 	```shell
 	echo `cat ~/.ssh/sshkey.pem.pub` >> ~/.ssh/authorized_keys
 	```
+
+Конфигурация сервера SSH хранится в файле `/etc/ssh/sshd_config`
+
+В случае проблем с аутентификацией смотреть `tail -f /var/log/auth.log`
+
 	
 ## Ссылки
 
-[Use Public Key Authentication with SSH](https://www.linode.com/docs/security/use-public-key-authentication-with-ssh) &mdash; вроде неплохой мануал
+* [Use Public Key Authentication with SSH](https://www.linode.com/docs/security/use-public-key-authentication-with-ssh) &mdash; вроде неплохой мануал
+* [Linux server security best practices](https://support.rackspace.com/how-to/linux-server-security-best-practices/)
+* [Как включить DSS-ключи для старых клиентов](https://www.gentoo.org/support/news-items/2015-08-13-openssh-weak-keys.html)
