@@ -46,6 +46,15 @@ fi
 ```
 
 
+### Как подключится к серверу без использования приватного ключа
+
+
+```
+ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no example.com
+```
+
+
+
 ## На удалённом хосте
 
 1. **Загрузить "sshkey.pem.pub"**
