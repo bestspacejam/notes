@@ -48,9 +48,14 @@ fi
 
 ### Как подключится к серверу без использования приватного ключа
 
-
 ```
 ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no example.com
+```
+
+### Быстрое копирование публичного ключа на удалённый сервер
+
+```
+ssh-copy-id <username>@<host>
 ```
 
 
