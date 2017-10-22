@@ -79,7 +79,16 @@ ssh-copy-id <username>@<host>
 	echo `cat ~/.ssh/sshkey.pem.pub` >> ~/.ssh/authorized_keys
 	```
 
-Конфигурация сервера SSH хранится в файле `/etc/ssh/sshd_config`
+### Настройки SSH сервера
+
+Файл `/etc/ssh/sshd_config`:
+```
+# Для доступа root-a только по публичному ключу
+PermitRootLogin prohibit-password
+
+# Включение аутентификации по публичному ключу
+PubkeyAuthentication yes
+```
 
 В случае проблем с аутентификацией смотреть `tail -f /var/log/auth.log`
 
@@ -104,8 +113,7 @@ ssh-copy-id <username>@<host>
 $ /etc/init.d/ssh restart
 ```
 
-
-На клиенте необходимо сбросить загруженный ключ для этого хоста
+*На клиенте необходимо сбросить загруженный ключ для этого хоста*
 
 
 * [Ubuntu / Debian Linux Regenerate OpenSSH Host Keys](https://www.cyberciti.biz/faq/howto-regenerate-openssh-host-keys/)
