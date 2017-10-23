@@ -64,7 +64,6 @@ ssh-copy-id <username>@<host>
 
 1. **Загрузить "sshkey.pem.pub"**
 2. **Создать файл "authorized_keys", если ещё не создан.**
-	**Внимание!** Команды должны выполняться из под пользователя к которому необходимо предоставить доступ по SSH.
 	
 	```shell
 	mkdir ~/.ssh
@@ -73,7 +72,10 @@ ssh-copy-id <username>@<host>
 	chmod 700 ~/.ssh
 	chmod 600 ~/.ssh/authorized_keys
 	```
-3. **Добавить публичный ключ в "authorized_keys"**
+	
+	Владельцем файла `authorized_keys` должен быть пользователь которому необходимо предоставить доступ по SSH.
+	
+3. **Добавить публичный ключ в `authorized_keys`**
 
 	```shell
 	echo `cat ~/.ssh/sshkey.pem.pub` >> ~/.ssh/authorized_keys
@@ -91,6 +93,8 @@ PubkeyAuthentication yes
 ```
 
 В случае проблем с аутентификацией смотреть `tail -f /var/log/auth.log`
+
+* [Список директив файла sshd_config](https://linux.die.net/man/5/sshd_config)
 
 
 ### Как обновить ключи сервера
