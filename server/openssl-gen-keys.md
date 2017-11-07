@@ -26,3 +26,10 @@ openssl rsa -in key.pem -pubout -out pubkey.pem
 ```
 openssl rsa -in key.pem -out privkey.pem
 ```
+
+***Извлечение закрытого ключа и сертификата из PFX***
+
+```shell
+openssl pkcs12 -in ca.pfx -out key.pem -nodes -nocerts
+openssl pkcs12 -in ca.pfx -out cert.pem -nodes -nokeys
+```
