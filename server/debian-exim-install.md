@@ -26,7 +26,14 @@ update-exim4.conf
 Изменить файл `/etc/exim4/exim4.conf.template`, добавить перед блоком `MAIN_TLS_ENABLE`:
 
 ```
+tls_on_connect_ports=465
 MAIN_TLS_ENABLE = yes
+```
+
+Изменить парамер `SMTPLISTENEROPTIONS` в файле `/etc/default/exim4`:
+
+```
+SMTPLISTENEROPTIONS='-oX 465:25 -oP /var/run/exim4/exim.pid'
 ```
 
 
@@ -39,3 +46,4 @@ service exim4 restart
 ## Материалы
 
 * [Debian Exim Installation](https://wiki.debian.org/Exim#Installation)
+* [НАСТРОЙКА TLS/SSL В EXIM4 НА DEBIAN](http://linuxsnippets.net/ru/node/358)
