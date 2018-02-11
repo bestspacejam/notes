@@ -57,6 +57,16 @@ openssl req -x509 -newkey rsa:2048 -keyout private-key.pem -out certificate.pem 
 openssl pkcs12 -in file.pfx -out file.pem
 ```
 
+
+## Генерация клиентского сертификата в P12 на основе закрытого ключа корневого сертификата
+
+Используется для реализации аутентификации по сертификату
+
+```shell
+openssl pkcs12 -export -in client/cert.pem -inkey client/key.pem -certfile ca.pem -name "Client" -out client/cert.p12
+```
+
+
 ## Объединение конечного сертификата с промежуточными
 
 **Принцип объединения:** Сначала идёт сертификат конечного домена, далее промежуточные сертификаты CA, самым последним идёт корневой.
