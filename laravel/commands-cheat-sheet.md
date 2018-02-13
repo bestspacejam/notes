@@ -20,6 +20,8 @@
 
 `php artisan cache:clear` - Сбросить кэш Laravel-а
 
+`php artisan view:clear` - Удалить все скомпилированные view-файлы
+
 
 ## Дополнительные полезные команды
 
