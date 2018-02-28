@@ -44,4 +44,4 @@ git checkout master -- 'public'
 git commit -m "Скопированы файлы из ветки master"
 ```
 
-[Quick tip: git-checkout specific files from another branch](http://nicolasgallagher.com/git-checkout-specific-files-from-another-branch/)
+Статья: [Quick tip: git-checkout specific files from another branch](http://nicolasgallagher.com/git-checkout-specific-files-from-another-branch/)
