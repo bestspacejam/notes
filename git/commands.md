@@ -35,3 +35,11 @@ git push --set-upstream origin new_branch   # Push the new branch, set local bra
 ```
 
 Источник: https://gist.github.com/lttlrck/9628955
+
+### Копирование файлов из ветки в текущую
+
+```shell
+git checkout adminpanel
+git checkout master -- 'public'
+git commit -m "Скопированы файлы из ветки master"
+```
