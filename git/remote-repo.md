@@ -27,3 +27,10 @@ done
 
 По мотивам мануала:
 https://dev.to/coolgoose/how-to-set-up-a-git-bare-repository-for-web-development-code-pushes-5ca4
+
+
+### Работа с репозиторием вынесенным отдельно от рабочего дерева
+
+```shell
+git --work-tree=/var/www/html --git-dir ./.gitrepo status
+```
