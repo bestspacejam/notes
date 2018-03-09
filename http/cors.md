@@ -55,9 +55,7 @@
 - **[Access-Control-Allow-Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers)**
 
 
-
 Пример ответа сервера:
-
 
 ```
 Access-Control-Allow-Origin: http://localhost:3000
@@ -72,5 +70,6 @@ Access-Control-Max-Age: 86400
 ## Ссылки
 
 - [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+- [Server-Side Access Control (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Server-Side_Access_Control) &mdash; пример обработки запросов с помощью PHP
 - [What are idempotent and/or safe methods?](http://restcookbook.com/HTTP%20Methods/idempotency/)
 - [Idempotent](https://developer.mozilla.org/en-US/docs/Glossary/Idempotent)
