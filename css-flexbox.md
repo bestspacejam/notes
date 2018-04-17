@@ -48,5 +48,6 @@ div {
 - [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 - [11 things I learned reading the flexbox spec](https://hackernoon.com/11-things-i-learned-reading-the-flexbox-spec-5f0c799c776b)
 - [`flex-grow` is weird. Or is it?](https://css-tricks.com/flex-grow-is-weird/)
+- [What are the differences between flex-basis and width?](https://stackoverflow.com/questions/34352140/what-are-the-differences-between-flex-basis-and-width) - хороший ответ на StackOverflow
 - [flex-shrink](https://css-tricks.com/almanac/properties/f/flex-shrink/)
 - [The Difference Between Width and Flex Basis](http://gedd.ski/post/the-difference-between-width-and-flex-basis/)
