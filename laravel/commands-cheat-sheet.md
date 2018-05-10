@@ -4,6 +4,9 @@
 - `--table=tablename` - Изменение схемы указаной таблицы
 - `--create=tablename` - Создание новой таблицы
 
+`php artisan make:controller ControllerName --resource` - PhotoController --resource
+-  `--resource` - создать [ресурсный контроллер](https://laravel.com/docs/5.5/controllers#resource-controllers)
+
 `php artisan migrate --seed` - Запустить миграцию (`--seed` с заполнением данными)
 
 `php artisan make:seeder UserTableSeeder` - Создать наполнитель базы данных
