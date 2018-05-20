@@ -1,0 +1,24 @@
+# Использование $IFS
+
+Файл `ifs.sh`:
+```shell
+#!/usr/bin/env bash
+
+list=(one two three "four five")
+IFS="|"
+
+# Склеивание слов из массива  в строку разделённую первым символом $IFS.
+a="${list[*]}"
+echo "$a"
+# $ one|two|three|four five
+
+# Здесь запускается обратный процесс - "parameter expansion" и $IFS 
+# используется для расширения строки разделённой символом `|` в слова.
+echo $a
+# $ one two three four five
+
+# Ещё пример расширения строки
+b="red|green|blue"
+echo $b
+# $ red green blue
+```
