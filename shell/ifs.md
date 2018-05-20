@@ -4,7 +4,7 @@
 ```shell
 #!/usr/bin/env bash
 
-list=(one two three "four five")
+list=(one two three "four,five")
 IFS="|,"
 
 # Склеивание слов из массива в строку разделённую первым символом $IFS.
