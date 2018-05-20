@@ -22,3 +22,7 @@ b="red|green|blue"
 echo $b
 # $ red green blue
 ```
+
+# Ссылки
+- https://www.gnu.org/software/bash/manual/html_node/Word-Splitting.html
+- https://bash.cyberciti.biz/guide/$IFS
