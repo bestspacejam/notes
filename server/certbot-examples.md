@@ -2,33 +2,42 @@
 
 ## Ручная генерация
 
-### Подтверждение владения доменом через HTTP-запрос
+Подтверждение владения доменом через HTTP-запрос:
 
 ```shell
 certbot certonly \
-	-n \
-	--manual \
-	--preferred-challenges http \
-	-m admin@example.com \
-	-d example.com
+  -n \
+  --manual \
+  --preferred-challenges http \
+  --email admin@example.com \
+  --domains example.com
 ```
 
-## Автоматическая генерация
 
-### Подтверждение владения доменом с сохранением файла в директорию веб-сервера (`--webroot`)
+## Автоматическое получение сертификата 
+
 
 ```shell
 certbot certonly \
-	-n \
-	--webroot \
-	--dry-run \
-	--agree-tos \
-	--email admin@example.com \
-	-w /usr/share/nginx/html \
-	-d example.com
+  -n \
+  --agree-tos \
+  --webroot \
+  --webroot-path /var/www/html \
+  --email admin@example.com \
+  --domains example.com
 ```
 
-**Замечание:** Веб-сервер должен быть настроен на отдачу файлов из указанной директории.
+Подтверждение владения доменом с сохранением файла в директорию `/.well-known/acme-challenge` веб-сервера.
+**Замечание:** Веб-сервер должен быть настроен на отдачу файлов из директории указанной в параметре `--webroot-path` .
+
+Для Nginx можно подключить вот такую "ловушку":
+
+
+```nginx
+location /.well-known/acme-challenge/ {
+  root /var/www/html;
+}
+```
 
 
 ## Генерация с помощью Docker контейнера
@@ -36,17 +45,17 @@ certbot certonly \
 
 ```shell
 docker run \
-	-ti \
-	--rm \
-	-p 80:80 \
-	-p 443:443 \
-	-v $(pwd)/letsencrypt:/etc/letsencrypt \
-	certbot/certbot \
-	certonly \
-		--standalone
-		--agree-tos \
-		-m admin@example.com \
-		-d example.com
+  -ti \
+  --rm \
+  -p 80:80 \
+  -p 443:443 \
+  -v "$PWD"/letsencrypt:/etc/letsencrypt \
+  certbot/certbot \
+  certonly \
+    --standalone
+    --agree-tos \
+    -m admin@example.com \
+    -d example.com
 ```
 
 
