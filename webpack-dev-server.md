@@ -12,4 +12,4 @@
 - Устанавливает опцию `{hot: true}`
 - Добавляет скрипт `['webpack/hot/dev-server']` во все точки входа (если `{inlile: true}`)
 
-[devServer.hot](https://webpack.js.org/configuration/dev-server/#devserver-hot) - документация
+Документация: [devServer.hot](https://webpack.js.org/configuration/dev-server/#devserver-hot)
