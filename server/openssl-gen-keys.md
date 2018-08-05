@@ -92,4 +92,9 @@ cat ComodoRSAAddTrustCA.crt "[ComodoRSADomain|Organization|ExtendedvalidationSec
 echo -n "alert('Hello, world.');" | openssl dgst -sha384 -binary | openssl base64 -A
 ```
 
+## Дополнительные материалы
+
+* [The Most Common OpenSSL Commands](https://www.sslshopper.com/article-most-common-openssl-commands.html)
+
+
 [1]: https://support.comodo.com/index.php?/comodo/Knowledgebase/Article/View/620/0/which-is-root-which-is-intermediate
