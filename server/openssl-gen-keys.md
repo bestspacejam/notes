@@ -79,7 +79,7 @@ openssl pkcs12 -export -in client/cert.pem -inkey client/key.pem -certfile ca.pe
 cat www.example.com.crt bundle.crt > www.example.com.chained.crt
 ```
 
-Создание бандла для использования в директиве "SSLCACertificateFile" Apache2 (пример для [сертификатов COMODO][1]):
+Создание бандла для использования в директиве "SSLCACertificateFile" Apache2 (пример для [сертификатов COMODO](https://support.comodo.com/index.php?/comodo/Knowledgebase/Article/View/620/0/which-is-root-which-is-intermediate)):
 
 ```shell
 cat ComodoRSAAddTrustCA.crt "[ComodoRSADomain|Organization|ExtendedvalidationSecureServerCA]".crt AddTrustExternalCARoot.crt > intermediate.ca-bundle
@@ -95,6 +95,3 @@ echo -n "alert('Hello, world.');" | openssl dgst -sha384 -binary | openssl base6
 ## Дополнительные материалы
 
 * [The Most Common OpenSSL Commands](https://www.sslshopper.com/article-most-common-openssl-commands.html)
-
-
-[1]: https://support.comodo.com/index.php?/comodo/Knowledgebase/Article/View/620/0/which-is-root-which-is-intermediate
