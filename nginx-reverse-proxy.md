@@ -34,6 +34,8 @@ location /frontend/ {
   proxy_pass http://$upstream_host;
 }
 ```
+При указании хоста через переменную, могут возникнуть проблемы с удалением `/frontend/` из `location`, в таком случае надо удалить его  через `rewrite ^/frontend/(.*) /$1 break;`.
+
 Дополнительно почитать можно тут:
 - [Nginx proxy_pass DNS Cache](https://www.nadeau.tv/nginx-proxy_pass-dns-cache/)
 - [Nginx with dynamic upstreams](https://tenzer.dk/nginx-with-dynamic-upstreams/)
