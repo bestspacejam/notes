@@ -17,15 +17,31 @@ location /static/ {
 **Важно:** Nginx при старте пытается резолвить все хосты `upstream`, и если какой-то из них не отвечает, то прокси-сервер не запускается.
 
 
-Для игнорирования разрешения имени при старте прокси-сервера можно использовать формат:
+### Игнорирование разрешения имени при старте:
 
 ```
 location /frontend/ {
   proxy_pass http://frontend$request_uri;
 }
 ```
+Тогда `upstream` будет резолвится при каждом обращении.
 
-## Директива [proxy_pass](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)
+Для включения динамического рарешения имён можно указать имя хоста через переменную. При указании переменной Nginx сначала будет искать  значение в группе серверов, а затем если не найдёт будет динамически резолвить его как имя хоста, через сервер указанный в директиве `resolver` или в файле `/etc/resolv.conf`.
+
+```
+location /frontend/ {
+  set $upstream_host "frontend";
+  proxy_pass http://$upstream_host;
+}
+```
+Дополнительно почитать можно тут:
+- [Nginx proxy_pass DNS Cache](https://www.nadeau.tv/nginx-proxy_pass-dns-cache/)
+- [Nginx with dynamic upstreams](https://tenzer.dk/nginx-with-dynamic-upstreams/)
+
+
+
+
+### Директива [proxy_pass](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)
 
 ```
 proxy_pass http://127.0.0.1/public/;
@@ -53,7 +69,7 @@ proxy_pass http://127.0.0.1/public$request_uri;
 `/static/assets/style.css` -> `http://127.0.0.1/public/static/assets/style.css`
 
 
-## Разрешение DNS имён при запуске внутри Docker-контейнера 
+### Разрешение DNS имён при запуске внутри Docker-контейнера 
 
 Docker использует для сервера имён адрес `127.0.0.11` 
 ```
