@@ -44,7 +44,9 @@ location /frontend/ {
 ### Директива [proxy_pass](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)
 
 ```
-proxy_pass http://127.0.0.1/public/;
+location /static/ {
+  proxy_pass http://127.0.0.1/public/;
+}
 ```
 
 Удаляет часть /static/ из оригинального запроса и добавляет оставшееся в конец проксируемого URI
@@ -53,7 +55,9 @@ proxy_pass http://127.0.0.1/public/;
 
 
 ```
-proxy_pass http://127.0.0.1;
+location /static/ {
+  proxy_pass http://127.0.0.1;
+}
 ```
 
 Добавляет весь оргигинальный запрос в конец проксируемого URI.  
@@ -61,7 +65,9 @@ proxy_pass http://127.0.0.1;
 `/static/assets/style.css` -> `http://127.0.0.1/static/assets/style.css`
 
 ```
-proxy_pass http://127.0.0.1/public$request_uri;
+location /static/ {
+  proxy_pass http://127.0.0.1/public$request_uri;
+}
 ```
 
 Добавляет весь оргигинальный запрос в конец проксируемого URI
