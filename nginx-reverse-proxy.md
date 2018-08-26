@@ -17,7 +17,7 @@ location /static/ {
 **Важно:** Nginx при старте пытается резолвить все хосты `upstream`, и если какой-то из них не отвечает, то прокси-сервер не запускается.
 
 
-### Игнорирование разрешения имени при старте:
+## Игнорирование разрешения имени при старте:
 
 ```
 location /frontend/ {
@@ -43,7 +43,10 @@ location /frontend/ {
 
 
 
-### Директива [proxy_pass](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)
+## Директива [proxy_pass](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)
+
+### Удалить `/static/` из оригинального запроса и добавить оставшуюся часть в конец проксируемого URI.  
+Пример: `/static/assets/style.css` -> `http://127.0.0.1/public/assets/style.css`
 
 ```
 location /static/ {
@@ -51,10 +54,9 @@ location /static/ {
 }
 ```
 
-Удаляет часть /static/ из оригинального запроса и добавляет оставшееся в конец проксируемого URI
-
-`/static/assets/style.css` -> `http://127.0.0.1/public/assets/style.css`
-
+### Добавить весь запрос в конец проксируемого URI
+В случае изменения оригинального запроса с помощью регулярных выражений передаётся изменёный запрос.  
+Пример: `/static/assets/style.css` -> `http://127.0.0.1/static/assets/style.css`
 
 ```
 location /static/ {
@@ -62,9 +64,8 @@ location /static/ {
 }
 ```
 
-Добавляет весь оргигинальный запрос в конец проксируемого URI.  
-В случае изменения оригинального запроса с помощью регулярных выражений передаётся изменёный запрос.  
-`/static/assets/style.css` -> `http://127.0.0.1/static/assets/style.css`
+### Добавить весь запрос в конец проксируемого URI
+Пример: `/static/assets/style.css` -> `http://127.0.0.1/public/static/assets/style.css`
 
 ```
 location /static/ {
@@ -72,12 +73,7 @@ location /static/ {
 }
 ```
 
-Добавляет весь оргигинальный запрос в конец проксируемого URI
-
-`/static/assets/style.css` -> `http://127.0.0.1/public/static/assets/style.css`
-
-
-### Разрешение DNS имён при запуске внутри Docker-контейнера 
+## Разрешение DNS имён при запуске внутри Docker-контейнера 
 
 Docker использует для сервера имён адрес `127.0.0.11` 
 ```
