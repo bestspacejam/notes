@@ -1,26 +1,29 @@
 # Склеивание массива в строку и разделение на слова с помощью $IFS
 
-Файл `ifs.sh`:
+Все элементы массива склеиваются в одно слово с первым символом $IFS в качестве разделителя:
+
 ```shell
-#!/usr/bin/env bash
-
-list=(one two three "four,five")
+list=(one two three "four five" "six|seven" "eight,nine")
 IFS="|,"
+printf " <%s>" "${list[*]}"; echo;
+# <one|two|three|four five|six|seven|eight,nine>
+```
 
-# Склеивание слов из массива в строку разделённую первым символом $IFS.
-a="${list[*]}"
-echo "$a"
-# $ one|two|three|four,five
+Каждый элемент массива становится отдельным словом:
 
-# Здесь запускается обратный процесс - "parameter expansion", и символы 
-# указанные в переменной IFS используются для расширения строки в слова.
-echo $a
-# $ one two three four five
+```shell
+list=(one two three "four five" "six|seven" "eight,nine")
+IFS="|,"
+printf " <%s>" "${list[@]}"; echo;
+# <one> <two> <three> <four five> <six|seven> <eight,nine>
+```
 
-# Ещё пример расширения строки
-b="red|green|blue"
-echo $b
-# $ red green blue
+Каждый элемент массива раскрывается как отдельное слово котороя в дальнейшем является источником для Word Splitting, Filename Expansion и Quote Removal:
+```shell
+list=(one two three "four five" "six|seven" "eight,nine")
+IFS="|,"
+printf " <%s>" ${list[*]}; echo;
+# <one> <two> <three> <four five> <six> <seven> <eight> <nine>
 ```
 
 ## Ссылки
