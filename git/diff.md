@@ -16,6 +16,12 @@ $ git diff HEAD
 Показать изменения в рабочей директории с момента последнего коммита; всё что будет отправлено в коммит при `git commit -a` (то есть без новых файлов).
 
 
+```
+git diff <old_commmit> <new_commit> > my.patch
+git apply my.patch
+```
+Сгенерировать заплатку на основе разницы между двумя коммитами и применить её. Ещё можно сделать `git cherry-pick -n <other_commit>`.
+
 ## Ссылки
 
 [Difference between git HEAD and the current project state?](https://stackoverflow.com/questions/3293607/difference-between-git-head-and-the-current-project-state)
