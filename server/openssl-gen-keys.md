@@ -12,7 +12,7 @@ openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
 - [Опции параметра "openssl req"](https://linux.die.net/man/1/req)
 
 
-**Извлечение открытого ключа из пары закрытого/открытого:**
+### Извлечение открытого ключа из пары закрытого/открытого:
 
 ```bash
 openssl rsa -in key.pem -pubout -out pubkey.pem
@@ -21,21 +21,20 @@ openssl rsa -in key.pem -pubout -out pubkey.pem
 - [Use RSA private key to generate public key?](https://stackoverflow.com/questions/5244129/use-rsa-private-key-to-generate-public-key)
 
 
-**Удаление пароля закрытого ключа:**
+### Удаление пароля закрытого ключа
 
 ```
 openssl rsa -in key.pem -out privkey.pem
 ```
 
-**Извлечение закрытого ключа и сертификата из PFX**
+### Извлечение закрытого ключа и сертификата из PFX
 
 ```shell
 openssl pkcs12 -in ca.pfx -out key.pem -nodes -nocerts
 openssl pkcs12 -in ca.pfx -out cert.pem -nodes -nokeys
 ```
 
-
-## Генерация закрытого и открытого ключа
+### Генерация закрытого и открытого ключа
 
 ```shell
 # Генерация пары закрытый/открытый ключ в формате RSA
@@ -45,20 +44,28 @@ openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:204
 ssh-keygen -f private_key.pem -y > public_ssh_key.pub
 ```
 
-## Генерация закрытого ключа и самоподписанного сертификата 
+### Генерация закрытого ключа и самоподписанного сертификата 
 
 ```shell
 openssl req -x509 -newkey rsa:2048 -keyout private-key.pem -out certificate.pem -days 365
 ```
 
-## Конвертация PFX в PEM формат
+### Генерация сертификата на основе его CSR подписанного ключом корневого центра сертификации 
+
+```
+openssl x509 -req -in server.bestspacejam.ru.csr -CA ca-root.crt -CAkey ca-private.key -CAcreateserial -out server.bestspacejam.ru.crt -days 3650
+```
+Помимо закрытого ключа корневого центра сертификации так же необходим его сертификат
+
+
+### Конвертация PFX в PEM формат
 
 ```shell
 openssl pkcs12 -in file.pfx -out file.pem
 ```
 
 
-## Генерация клиентского сертификата в P12 на основе закрытого ключа корневого сертификата
+### Генерация клиентского сертификата в P12 на основе закрытого ключа корневого сертификата
 
 Используется для реализации аутентификации по сертификату
 
@@ -66,12 +73,11 @@ openssl pkcs12 -in file.pfx -out file.pem
 openssl pkcs12 -export -in client/cert.pem -inkey client/key.pem -certfile ca.pem -name "Client" -out client/cert.p12
 ```
 
-
-## Объединение конечного сертификата с промежуточными
+### Объединение конечного сертификата с промежуточными
 
 **Принцип объединения:** Сначала идёт сертификат конечного домена, далее промежуточные сертификаты CA, самым последним идёт корневой.
 
-### Примеры
+## Примеры
 
 Создание бандла для использования в директиве "ssl_certificate" Nginx-а:
 
@@ -95,3 +101,4 @@ echo -n "alert('Hello, world.');" | openssl dgst -sha384 -binary | openssl base6
 ## Дополнительные материалы
 
 * [The Most Common OpenSSL Commands](https://www.sslshopper.com/article-most-common-openssl-commands.html)
+* [OpenSSL Essentials: Working with SSL Certificates, Private Keys and CSRs](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs)
