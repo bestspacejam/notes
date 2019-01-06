@@ -19,7 +19,7 @@ export PS1='\[\033[01;32m\]\u@\[\e[0;31m\]\h PRODUCTION\e[m\]: \[\033[01;34m\]\w
 sudo apt-get install colortest
 ```
 
-2. Комманды для проверки цветов:
+2. Команды для проверки цветов:
 
 ```
 colortest-16   colortest-16b  colortest-256  colortest-8
