@@ -1,19 +1,16 @@
 # Заметки о Tmux
 
-- `tmux split-window -h` - добавляет панель справа (по горизонтали)
-- `tmux split-window -v` - добавляет панель снизу (по вертикали)
-
-Для более "логичного" разделения окна можно задать в конфигурации:
+Для более логичного разделения окна можно задать в конфигурации:
 
 ```
-bind-key v split-window -h
-bind-key h split-window -v
+bind-key v split-window -h       # Создать панель справа (по горизонтали)
+bind-key h split-window -v       # Создать панель снизу (по вертикали)
 ```
 
 ## Автоматическое изменение размеров панелей
 
-    C-b M-1             # vertical split, all panes same width
-    C-b M-2             # horizontal split, all panes same height
+    C-b M-1             # Вертикальное разделение, все панели одинаковой ширины
+    C-b M-2             # Горизонтальное разделение, все панели одинаковой высоты
     C-b M-3             # horizontal split, main pane on top,
                           other panes on bottom, vertically split, all same width
     C-b M-4             # vertical split, main pane left,
