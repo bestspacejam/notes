@@ -1,4 +1,4 @@
-# Полезные команды
+# Полезные Shell команды
 
 ```shell
 # Вывести содержимое файла без закомментированных строк
@@ -42,5 +42,6 @@ cat file | tee -a log | cat > /dev/null
 
 # bonus: exit terminal but leave all processes running
 disown -a && exit
-
 ```
+
+[8 super heroic Linux commands that you probably aren't using](https://www.youtube.com/watch?v=Zuwa8zlfXSY)
