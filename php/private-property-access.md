@@ -35,7 +35,6 @@ var_dump($a->prop());
 http://sandbox.onlinephpfunctions.com/code/eee6987d398f4e731d60611bff622da99dd76329
 ```php
 <?php
-
 class WithPrivateProp
 {
     private $prop = "123";
@@ -45,7 +44,6 @@ class WithPrivateProp
         return $this->prop;
     }
 }
- 
 
 $foo = new WithPrivateProp();
 $haha = \Closure::bind(function ($foo, $prop) {return $foo->$prop; }, null, WithPrivateProp::class);
