@@ -6,7 +6,7 @@
 * [Ocramius / GeneratedHydrator](https://github.com/Ocramius/GeneratedHydrator)
 * [Symfony / The PropertyAccess Component](https://symfony.com/doc/current/components/property_access.html)
 
-С помощью [*Object Binding*](https://secure.php.net/manual/ru/class.closure.php):
+С помощью [Closure Binding](https://secure.php.net/manual/ru/class.closure.php):
 
 http://sandbox.onlinephpfunctions.com/code/d22589ae24a3f002125536ff876140a3e1f7309c
 ```php
