@@ -31,8 +31,9 @@ basename $PWD
 echo "${PWD##*/}"
 
 # Удаление с очисткой конечной косой черты
+shopt -s extglob
 xbasename() {
-  param=${1%/}
+  param=${1%%+(/)}
   echo "${param##*/}"
 }
 ```
