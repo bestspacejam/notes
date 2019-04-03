@@ -17,10 +17,9 @@ mysqldump -u user -p database | gzip > database.sql.gz
 gunzip < database.sql.gz | mysql -u user -p database
 
 # Экспорт из Docker-контейнера
-# Неправильно работает, сохраняет строку "Enter password:" в текст дампа
-docker exec -ti <mariadb_container> sh -c 'exec mysqldump -uroot -p <database_name> <table1> <table2>' |
+docker exec -i <mariadb_container> sh -c 'exec mysqldump -u<username> -p<password> <database_name> <table1> <table2>' |
  gzip > dump.sql.gz
 
 # Импорт в Docker-контейнер
-docker exec -i <container> mysql -uroot <database> < metalog_views.sql
+docker exec -i <container> mysql -u<username> <database> < metalog_views.sql
 ```
