@@ -15,3 +15,8 @@ services:
     ports:
       - 8080:80
 ```
+
+Импорт дампа в сервис:
+```bash
+docker-compose exec -T db mysql -uroot < all-databases.backup.sql
+```
