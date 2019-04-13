@@ -1,12 +1,5 @@
 # MySQL / MariaDB
 
-Создание пользователя root для всех входящих подключений
-
-```sql
-CREATE USER 'root'@'%' IDENTIFIED BY '<password>';
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '<password>';
-```
-
 ### Простейший экспорт / импорт дампа БД
 
 ```shell
@@ -48,11 +41,11 @@ quit;
 
 ```sql
 CREATE USER 'root'@'%' IDENTIFIED BY 'password';
-GRANT ALL on *.* to 'root'@'%';
-FLUSH PRIVILEGES;
+GRANT ALL ON *.* to 'root'@'%';
 ```
 
-Если опустить параметр `IDENTIFIED BY` то пользователь может входить без пароля.
+Если опустить параметр `IDENTIFIED BY`, то пользователь может входить без пароля.
+
 
 ### Изменение пароля у существующего пользователя
 
