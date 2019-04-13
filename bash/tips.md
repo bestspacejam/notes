@@ -16,3 +16,11 @@ uppercased
 - `^^` - все подходящие символы приводятся ВЕРХНЕМУ регистру
 - `,` - приведение первого символа к нижнему регистру если он подходит под шаблон
 - `^` - приведение первого символа к ВЕРХНЕМУ регистру если он подходит под шаблон
+
+### Вывести только печатаемые символы из содержимого файла
+
+```shell
+tr -cd "[:print:]\n" < file1
+```
+
+[Removing all special characters from a string in Bash](https://stackoverflow.com/questions/36926999/removing-all-special-characters-from-a-string-in-bash)
