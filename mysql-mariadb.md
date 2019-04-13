@@ -36,9 +36,9 @@ mysql
 
 В режиме командной строки:
 ```sql
-use mysql;
+USE mysql;
 UPDATE user SET authentication_string=PASSWORD('password') WHERE User='root';
-flush privileges;
+FLUSH PRIVILEGES;
 quit;
 ```
 `flush privileges` необходимо выполнять после всех прямых манипуляций с таблицой пользователей
@@ -49,6 +49,7 @@ quit;
 ```sql
 CREATE USER 'root'@'%' IDENTIFIED BY 'password';
 GRANT ALL on *.* to 'root'@'%';
+FLUSH PRIVILEGES;
 ```
 
 Если опустить параметр `IDENTIFIED BY` то пользователь может входить без пароля.
