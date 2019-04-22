@@ -11,4 +11,4 @@
 ## Выравнивание
 
 - `{justify,align}-items` - выравнивает содержимое ячеек по горизонтали и по вертикали (start | end | center | stretch)
-- `{justify,align}-content` - выравнивает содержимое grid-контейнера (start | end | center | stretch | space-around | space-between | space-evenly)
+- `{justify,align}-content` - выравнивает содержимое grid-контейнера (start | end | center | stretch | space-around | space-between | space-evenly), то есть управляет выравниванием самих ячеек внутри контейнера.
