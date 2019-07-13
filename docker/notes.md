@@ -27,3 +27,8 @@ bf747efa0e2f
 dea752e4e117
 511136ea3c5a
 ````
+
+Тоже самое, но проще:
+```
+$ docker image prune
+```
