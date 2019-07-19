@@ -12,3 +12,7 @@ git config push.default current
 
 ## Документация
 [git config](https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-config.html)
+
+[“simple” vs “current” push.default in git for decentralized workflow](https://stackoverflow.com/questions/23918062/simple-vs-current-push-default-in-git-for-decentralized-workflow)
+
+[Why do I need to do `--set-upstream` all the time?](https://stackoverflow.com/questions/6089294/why-do-i-need-to-do-set-upstream-all-the-time)
