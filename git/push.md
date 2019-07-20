@@ -1,5 +1,7 @@
 # Git Push
 
+Настройка поведения `git push` без явного указания репозитория и ветки
+
 ```shell 
 git config push.default upstream
 ```
