@@ -11,6 +11,11 @@ sudo certbot certonly --keep-until-expiring --standalone -d domain.example.com -
 line="30 2 * * 1 certbot renew >> /var/log/letsencrypt-renew.log"
 (crontab -u root -l; echo "$line" ) | crontab -u root -
 
+# Ограничение доступа к Registry:
+# https://docs.docker.com/registry/deploying/#restricting-access
+mkdir auth
+docker run --entrypoint htpasswd registry:2.7.1 -Bbn login password > auth/htpasswd
+
 docker run -d \
   -p 443:443 \
   --restart=always \
@@ -25,9 +30,6 @@ docker run -d \
   -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
   -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
   registry:2.7.1
-
-# Ограничение доступа к Registry:
-# https://docs.docker.com/registry/deploying/#restricting-access
 
 # Просмотр каталога образов:
 # https://domain.example.com/v2/_catalog
