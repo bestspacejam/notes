@@ -8,8 +8,7 @@
 sudo apt-get install certbot -t stretch-backports
 sudo certbot certonly --keep-until-expiring --standalone -d domain.example.com --email neter@mail.ru
 
-line="30 2 * * 1 certbot renew >> /var/log/letsencrypt-renew.log"
-(crontab -u root -l; echo "$line" ) | crontab -u root -
+{ crontab -u root -l; echo "30 2 * * 1 certbot renew >> /var/log/letsencrypt-renew.log"; } | crontab -u root -
 
 # Ограничение доступа к Registry:
 # https://docs.docker.com/registry/deploying/#restricting-access
