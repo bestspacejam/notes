@@ -104,4 +104,5 @@ location /page {
 ```
 
 Вообще, все внешние ресуры лучше резолвить динамически, так как ресурс может изменить IP адрес, а реверс-прокси будет стучаться в тот который получил при запуске.
-Более продробное описанине проблемы: [Nginx resolver explained](https://distinctplace.com/2017/04/19/nginx-resolver-explained/)
+
+Более продробное описание: [Nginx resolver explained](https://distinctplace.com/2017/04/19/nginx-resolver-explained/)
