@@ -12,3 +12,20 @@
 
 - `{justify,align}-items` - выравнивает содержимое ячеек по горизонтали и по вертикали (start | end | center | stretch)
 - `{justify,align}-content` - выравнивает содержимое grid-контейнера (start | end | center | stretch | space-around | space-between | space-evenly), то есть управляет выравниванием самих ячеек внутри контейнера.
+
+
+## Создание колонок
+
+```css
+/* генерирует сетку на основе ширины контейнера */
+grid-template-columns: repeat(auto-fit, 100px);
+
+/* генерирует сетку на основе ширины данных */
+grid-template-columns: repeat(auto-fill, 100px);
+
+/* подгонет колонки по ширине контейнера, с минимумом ширины в 100 пикселов */
+grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
+
+/* как auto, но не более 500 пикселов */
+grid-template-columns: fit-content(500px);
+```
