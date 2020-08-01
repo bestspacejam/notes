@@ -1,25 +1,16 @@
 # Проблемы и решения при работе в Linux Mint
 
-## Backing up and restoring your cinnamon settings (dconf)
+## Сохранение настроек Cinamoon
 
-**To backup:**
+```shell
+# Backup
+dconf dump /org/cinnamon/ > cinnamon_settings
 
-From a terminal, run:
+# Reset to defaults
+# Cinnamon may freeze or crash doing this
+dconf reset -f /org/cinnamon/
 
-`dconf dump /org/cinnamon/ > backup_of_my_cinnamon_settings`
-
-save the `backup_of_my_cinnamon_settings` file somewhere for later
-
-
-**To reset to defaults:**
-
-`dconf reset -f /org/cinnamon/`
-
-Note, cinnamon may freeze or crash doing this
-
-
-**To restore all your settings:**
-
-`dconf load /org/cinnamon/ < backup_of_my_cinnamon_settings`
-
-Again, cinnamon may freeze crash after this (recommend at least logging out/back in)
+# Restore settings
+# Cinnamon may freeze crash after this (recommend at least logging out/back in)
+dconf load /org/cinnamon/ < cinnamon_settings`
+```
