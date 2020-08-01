@@ -12,5 +12,5 @@ dconf reset -f /org/cinnamon/
 
 # Restore settings
 # Cinnamon may freeze crash after this (recommend at least logging out/back in)
-dconf load /org/cinnamon/ < cinnamon_settings`
+dconf load /org/cinnamon/ < cinnamon_settings
 ```
