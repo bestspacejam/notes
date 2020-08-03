@@ -13,6 +13,7 @@ cd $(mktemp -d) # get an instant temporary directory
 
 
 Скопировано из [EngineerMan / YouTube](https://github.com/engineer-man/youtube):
+[8 super heroic Linux commands that you probably aren't using](https://www.youtube.com/watch?v=Zuwa8zlfXSY)
 
 ```shell
 # 1. redo last command but as root
@@ -44,4 +45,9 @@ cat file | tee -a log | cat > /dev/null
 disown -a && exit
 ```
 
-[8 super heroic Linux commands that you probably aren't using](https://www.youtube.com/watch?v=Zuwa8zlfXSY)
+## Разбор текстовых файлов
+
+```shell
+# Отсортировать лог-файл по содержимому строки
+paste -d' ' <(grep -o -E 'Time:[^,]+' performance.log | cut -d' ' -f2-) performance.log | sort -h
+```
