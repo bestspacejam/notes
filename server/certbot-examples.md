@@ -39,9 +39,21 @@ location /.well-known/acme-challenge/ {
 }
 ```
 
+Сертификат сохраняется в директории `/etc/letsencrypt/archive/<domain>` и доступен через символическую ссылку из директории `/etc/letsencrypt/live/<domain>/cert.pem`)
+См. подробнее: [Where are my certificates?](https://certbot.eff.org/docs/using.html#where-are-my-certificates)
+
+
+## Проверка генерации сертификата
+
+Можно использовать флаг `--test-cert` или `--dry-run` для проверки, без генерации файла сертификата.
+
+## Список сертификатов
+
+```shell
+certbot certificates
+```
 
 ## Генерация с помощью Docker контейнера
-
 
 ```shell
 docker run \
@@ -58,17 +70,3 @@ docker run \
     -d example.com
 ```
 
-
-Сертификат сохраняется в директории `/etc/letsencrypt/archive/<domain>` и доступен через символическую ссылку из директории `/etc/letsencrypt/live/<domain>/cert.pem`)
-См. подробнее: [Where are my certificates?](https://certbot.eff.org/docs/using.html#where-are-my-certificates)
-
-
-## Проверка генерации сертификата
-
-Можно использовать флаг `--test-cert` или `--dry-run` для проверки, без генерации файла сертификата.
-
-## Список сертификатов
-
-```shell
-certbot certificates
-```
