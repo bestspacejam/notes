@@ -1,5 +1,9 @@
 # Logical Volume Manager (LVM)
 
+- **Physical Volume** - физический том, напимер накопитель `/dev/sdb` или раздел `/dev/sdb1`
+- **Volume Group** - группа физических томов
+- **Logical Volume** - логический том, использует выделенное место на связанном Volume Group
+
 Основные команды:
 - vgs
 - lvs
