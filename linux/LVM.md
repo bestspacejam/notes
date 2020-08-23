@@ -10,6 +10,8 @@
 - vgremove
 - pvremove
 - lvremove
+- vgdisplay
+- lvdisplay
 - pvdisplay
 
 ## Ссылки
