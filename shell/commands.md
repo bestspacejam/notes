@@ -48,7 +48,7 @@ disown -a && exit
 paste -d' ' <(grep -o -E 'Time:[^,]+' performance.log | cut -d' ' -f2-) performance.log | sort -h
 ```
 
-## Вызвать команду для каждой строки из файла в качестве параметра
+### Вызвать команду для каждой строки из файла в качестве параметра
 
 Описание проблемы, почему аргумент `-L1` не совсем  для этого не подходит:
 
@@ -66,10 +66,15 @@ xargs -a params.list -n1 -d$'\n' printf '{%s}\n'
 Скрипт для тестов:
 ```shell
 #!/usr/bin/env sh
-
-echo -n '-> '
+printf '-> '
 printf '{%s}\n' "$@"
 ```
 
 Обсуждение: https://stackoverflow.com/a/28806991/9215292
 
+### Вызвать команду для каждого переданного аргумента
+```shell
+#!/usr/bin/env bash
+set -e -o pipefail
+printf '%s\0' "$@" | xargs -0n1 printf '{%s}\n'
+```
