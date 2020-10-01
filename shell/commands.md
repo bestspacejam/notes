@@ -11,7 +11,6 @@ nmcli dev show | grep DNS | sed 's/\s\s*/\t/g' | cut -f 2
 cd $(mktemp -d) # get an instant temporary directory
 ```
 
-
 Скопировано из [EngineerMan / YouTube](https://github.com/engineer-man/youtube):
 [8 super heroic Linux commands that you probably aren't using](https://www.youtube.com/watch?v=Zuwa8zlfXSY)
 
@@ -96,3 +95,18 @@ echo "${param##*/}"
 ```
 
 `##*/` - это [расширение параметра](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html), оно указывает удалить из значения самый длинный найденный шаблон, в данном случае это все символы до последней косой черты.
+
+
+### Команда cd
+В переменной`$PWD` содержится путь до текущей директории
+
+```shell
+# Домашняя директория
+cd
+cd ~
+cd $HOME
+
+# Предыдущую директория
+cd
+cd $OLDPWD
+```
