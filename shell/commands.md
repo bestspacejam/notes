@@ -1,4 +1,4 @@
-# Полезные Shell команды
+### Полезные Shell команды
 
 ```shell
 # Вывести содержимое файла без закомментированных строк
@@ -10,9 +10,7 @@ nmcli dev show | grep DNS | sed 's/\s\s*/\t/g' | cut -f 2
 # Перейти во временную директорию
 cd $(mktemp -d) # get an instant temporary directory
 ```
-
-Скопировано из [EngineerMan / YouTube](https://github.com/engineer-man/youtube):
-[8 super heroic Linux commands that you probably aren't using](https://www.youtube.com/watch?v=Zuwa8zlfXSY)
+Источник: [8 super heroic Linux commands that you probably aren't using](https://www.youtube.com/watch?v=Zuwa8zlfXSY)
 
 ```shell
 # 1. redo last command but as root
@@ -110,3 +108,27 @@ cd $HOME
 cd
 cd $OLDPWD
 ```
+
+### Очистка содержимого от непечатаемых символов
+
+```shell
+tr -cd "[:print:]\n" < file1
+```
+Источник: [Removing all special characters from a string in Bash](https://stackoverflow.com/questions/36926999/removing-all-special-characters-from-a-string-in-bash)
+
+### Использование DEBUG trap для отладки скрипта
+
+```shell
+#!/usr/bin/env bash
+trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
+
+var=2
+echo $((var+2))
+```
+Пример:
+```
+$ ./trap.sh
+[./trap.sh:4] var=2?
+[./trap.sh:5] echo $((var+2))?
+```
+
