@@ -134,7 +134,6 @@ $ ./trap.sh
 
 ### Проверить, что stdin текущей команды открыт не в терминале
 
-```
-$ { [ ! -t 0 ] && cat; } <<< redirection
-redirection
+```shell
+{ [ ! -t 0 ] && cat; } <<< redirection
 ```
