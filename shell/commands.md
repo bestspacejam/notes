@@ -132,3 +132,9 @@ $ ./trap.sh
 [./trap.sh:5] echo $((var+2))?
 ```
 
+### Проверить, что stdin текущей команды открыт не в терминале
+
+```
+$ { [ ! -t 0 ] && cat; } <<< redirection
+redirection
+```
