@@ -44,9 +44,7 @@ echo ${!name}
 #### ${parameter^pattern}
 Первый подходящий символ приводится к ВЕРХНЕМУ регистру
 
-Пример
 ```shell
-# Изменение регистра значения переменной
 example=UPPERCASED
 echo "${example,,}"
 # uppercased
