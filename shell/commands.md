@@ -137,3 +137,10 @@ $ ./trap.sh
 ```shell
 { [ ! -t 0 ] && cat; } <<< redirection
 ```
+
+# Вывести строку с поддержкой специальных символов
+```shell
+echo -n $'one\ntwo\nthree'
+echo -n -e "one\ntwo\nthree"
+printf '%b' "one\ntwo\nthree"
+```
