@@ -138,7 +138,7 @@ $ ./trap.sh
 { [ ! -t 0 ] && cat; } <<< redirection
 ```
 
-# Вывести строку с поддержкой специальных символов
+### Вывести строку с поддержкой специальных символов
 ```shell
 echo -n $'one\ntwo\nthree'
 echo -n -e "one\ntwo\nthree"
