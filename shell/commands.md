@@ -1,16 +1,5 @@
 ### Полезные Shell команды
 
-```shell
-# Вывести содержимое файла без закомментированных строк
-grep -v "^$\|^#" /etc/dnsmasq.conf
-
-# Посмотреть список ДНС серверов используемых во всех подключениях
-nmcli dev show | grep DNS | sed 's/\s\s*/\t/g' | cut -f 2
-
-# Перейти во временную директорию
-cd $(mktemp -d) # get an instant temporary directory
-```
-Источник: [8 super heroic Linux commands that you probably aren't using](https://www.youtube.com/watch?v=Zuwa8zlfXSY)
 
 ```shell
 # 1. redo last command but as root
@@ -38,12 +27,42 @@ mkdir -p folder/{sub1,sub2}/{sub1,sub2,sub3}
 # 8. intercept stdout and log to file
 cat file | tee -a log | cat > /dev/null
 
-# bonus: exit terminal but leave all processes running
+# 9. exit terminal but leave all processes running
 disown -a && exit
 
-# Отсортировать лог-файл по содержимому строки
+# 10. Отсортировать лог-файл по содержимому строки
 paste -d' ' <(grep -o -E 'Time:[^,]+' performance.log | cut -d' ' -f2-) performance.log | sort -h
+
+# 11. Вывести содержимое файла без закомментированных строк
+grep -v "^$\|^#" /etc/dnsmasq.conf
+
+# 12. Вывести список всех используемых ДНС серверов
+nmcli dev show | grep DNS | sed 's/\s\+/\t/g' | cut -f2
+
+# 12.1. Вывести вторую колонку записи содержащую значение
+nmcli dev show | awk '$1 ~ /DNS/ {print $2}'
+
+# 13. Создать и перейти во временную директорию
+cd "$(mktemp -d)"
+
+# 14. Проверить, что `stdin` команды открыт не в терминале
+{ [ ! -t 0 ] && cat; } <<< redirection
+
+# 15. Вывести строку с поддержкой специальных символов
+echo -n $'one\ntwo\nthree'
+echo -n -e "one\ntwo\nthree"
+printf '%b' "one\ntwo\nthree"
+
+# 16. Вызвать команду для каждого переданного аргумента
+printf '%s\0' "$@" | xargs -0n1 printf '{%s}\n'
+
+# 17. Очистка содержимого от непечатаемых символов
+tr -cd "[:print:]\n" < file1
 ```
+
+#### Ссылки
+* [8 super heroic Linux commands that you probably aren't using](https://www.youtube.com/watch?v=Zuwa8zlfXSY)
+* [Removing all special characters from a string in Bash](https://stackoverflow.com/questions/36926999/removing-all-special-characters-from-a-string-in-bash)
 
 ### Вызвать команду для каждой строки из файла в качестве параметра
 
@@ -67,14 +86,8 @@ printf '-> '
 printf '{%s}\n' "$@"
 ```
 
-Обсуждение: https://stackoverflow.com/a/28806991/9215292
+Источник: [Make xargs execute the command once for each line of input](https://stackoverflow.com/a/28806991/9215292)
 
-### Вызвать команду для каждого переданного аргумента
-```shell
-#!/usr/bin/env bash
-set -e -o pipefail
-printf '%s\0' "$@" | xargs -0n1 printf '{%s}\n'
-```
 
 ### Получить имя директории/файла
 
@@ -83,7 +96,7 @@ printf '%s\0' "$@" | xargs -0n1 printf '{%s}\n'
 basename "$PWD"
 
 # Через расширение параметра
-# Важно: Если путь оканчивается косой чертой - вернётся пустая строка
+# Замечание: Если путь оканчивается косой чертой - вернётся пустая строка
 echo "${PWD##*/}"
 
 # Поддержка путей оканчивающихся косой чертой (/path/to/directory/)
@@ -92,36 +105,33 @@ param=${1%%+(/)}
 echo "${param##*/}"
 ```
 
-`##*/` - это [расширение параметра](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html), оно указывает удалить из значения самый длинный найденный шаблон, в данном случае это все символы до последней косой черты.
+`##*/` - удалить из значения самый длинный найденный шаблон. В данном случае это все символы до последней косой черты (см.: [расширение параметра](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html)).
 
 
-### Команда cd
-В переменной`$PWD` содержится путь до текущей директории
+### Навигация в консоли
 
 ```shell
-# Домашняя директория
+# Перейти в домашнюю директорию
 cd
 cd ~
-cd "$HOME"
 
-# Предыдущую директория
-cd
-cd "$OLDPWD"
+# Вернуться в предыдущую директорию
+cd -
 ```
 
-### Очистка содержимого от непечатаемых символов
+### Переменные окружения
 
-```shell
-tr -cd "[:print:]\n" < file1
 ```
-Источник: [Removing all special characters from a string in Bash](https://stackoverflow.com/questions/36926999/removing-all-special-characters-from-a-string-in-bash)
+$HOME - домашняя директория 
+$PWD - путь до текущей директории 
+$OLDPWD - путь до предыдущей директории 
+```
+
 
 ### Использование DEBUG trap для отладки скрипта
 
 ```shell
-#!/usr/bin/env bash
 trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-
 var=2
 echo $((var+2))
 ```
@@ -130,17 +140,4 @@ echo $((var+2))
 $ ./trap.sh
 [./trap.sh:4] var=2?
 [./trap.sh:5] echo $((var+2))?
-```
-
-### `stdin` команды открыт не в терминале
-
-```shell
-{ [ ! -t 0 ] && cat; } <<< redirection
-```
-
-### Вывести строку с поддержкой специальных символов
-```shell
-echo -n $'one\ntwo\nthree'
-echo -n -e "one\ntwo\nthree"
-printf '%b' "one\ntwo\nthree"
 ```
