@@ -37,9 +37,6 @@ paste -d' ' <(grep -o -E 'Time:[^,]+' performance.log | cut -d' ' -f2-) performa
 grep -v "^$\|^#" /etc/dnsmasq.conf
 
 # 12. Вывести список всех используемых ДНС серверов
-nmcli dev show | grep DNS | sed 's/\s\+/\t/g' | cut -f2
-
-# 12.1. Вывести вторую колонку записи содержащую значение
 nmcli dev show | awk '$1 ~ /DNS/ {print $2}'
 
 # 13. Создать и перейти во временную директорию
@@ -58,6 +55,10 @@ printf '%s\0' "$@" | xargs -0n1 printf '{%s}\n'
 
 # 17. Очистка содержимого от непечатаемых символов
 tr -cd "[:print:]\n" < file1
+
+# 18. Создание архива tar со списком файлов без директории "."
+#     Команда запускается в подоболочке для того чтобы не менять текущее окружение.
+(shopt -s dotglob && cd directory/ && tar -czpf ../directory.tgz -- *)
 ```
 
 #### Ссылки
