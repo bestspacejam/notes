@@ -117,27 +117,24 @@ var=2
 echo $((var+2))
 ```
 
-### Склеивание массива в строку и разделение на слова с помощью $IFS
+### Склеивание массива в строку и разделение на слова
 
 
 ```shell
-# Все элементы массива склеиваются в одно слово с первым символом $IFS в качестве разделителя:
-# <one|two|three|four five|six|seven|eight,nine>
-list=(one two three "four five" "six|seven" "eight,nine")
-IFS="|,"
+IFS="| "
+list=(one "two three" four)
+
+# Все элементы массива склеиваются в одно слово с первым символом IFS в качестве разделителя:
+# <one|two three|four>
 printf " <%s>" "${list[*]}"; echo;
 
-# Каждый элемент массива становится отдельным словом:
-# <one> <two> <three> <four five> <six|seven> <eight,nine>
-list=(one two three "four five" "six|seven" "eight,nine")
-IFS="|,"
+# Каждый элемент массива становится словом, IFS не используется:
+# <one> <two three> <four>
 printf " <%s>" "${list[@]}"; echo;
 
 # Каждый элемент массива раскрывается как отдельное слово которое 
 # в дальнейшем является источником для Word Splitting, Filename Expansion и Quote Removal:
-# <one> <two> <three> <four five> <six> <seven> <eight> <nine>
-list=(one two three "four five" "six|seven" "eight,nine")
-IFS="|,"
+# <one> <two> <three> <four>
 printf " <%s>" ${list[*]}; echo;
 ```
 
