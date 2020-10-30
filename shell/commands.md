@@ -115,12 +115,6 @@ trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
 var=2
 echo $((var+2))
 ```
-Пример:
-```
-$ ./trap.sh
-[./trap.sh:4] var=2?
-[./trap.sh:5] echo $((var+2))?
-```
 
 ### Склеивание массива в строку и разделение на слова с помощью $IFS
 
