@@ -64,7 +64,7 @@ echo "${0##*/}"
 * [8 super heroic Linux commands that you probably aren't using](https://www.youtube.com/watch?v=Zuwa8zlfXSY)
 * [Removing all special characters from a string in Bash](https://stackoverflow.com/questions/36926999/removing-all-special-characters-from-a-string-in-bash)
 
-### Вызвать команду для каждой строки из файла в качестве параметра
+### Вызов команды для каждой строки из файла в качестве параметра
 
 Описание проблемы, почему аргумент `-L1` не совсем  для этого не подходит:
 
@@ -121,3 +121,58 @@ $ ./trap.sh
 [./trap.sh:4] var=2?
 [./trap.sh:5] echo $((var+2))?
 ```
+
+### Склеивание массива в строку и разделение на слова с помощью $IFS
+
+
+```shell
+# Все элементы массива склеиваются в одно слово с первым символом $IFS в качестве разделителя:
+# <one|two|three|four five|six|seven|eight,nine>
+list=(one two three "four five" "six|seven" "eight,nine")
+IFS="|,"
+printf " <%s>" "${list[*]}"; echo;
+
+# Каждый элемент массива становится отдельным словом:
+# <one> <two> <three> <four five> <six|seven> <eight,nine>
+list=(one two three "four five" "six|seven" "eight,nine")
+IFS="|,"
+printf " <%s>" "${list[@]}"; echo;
+
+# Каждый элемент массива раскрывается как отдельное слово которое 
+# в дальнейшем является источником для Word Splitting, Filename Expansion и Quote Removal:
+# <one> <two> <three> <four five> <six> <seven> <eight> <nine>
+list=(one two three "four five" "six|seven" "eight,nine")
+IFS="|,"
+printf " <%s>" ${list[*]}; echo;
+```
+
+#### Ссылки
+- https://www.gnu.org/software/bash/manual/html_node/Word-Splitting.html
+- https://bash.cyberciti.biz/guide/$IFS
+
+
+### Расширение параметров
+
+```shell
+# Имя текущей директории
+echo "${PWD##*/}"
+
+# Имя выполняемого скрипта
+echo "${0##*/}"
+
+# Путь до директории выполняемого скрипта
+echo "${0%/*}"
+echo "$(dirname $0)"
+
+# Изменить регистр значения на нижний:
+example=UPPERCASED
+echo "${example,,}"
+
+# Получить значение переменной "bob":
+bob=user
+name=bob
+echo ${!name}
+```
+
+#### Ссылки
+* [Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html)
