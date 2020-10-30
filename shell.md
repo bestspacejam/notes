@@ -1,5 +1,6 @@
-### Полезные Shell команды
+# Консоль
 
+### Полезные команды
 
 ```shell
 # 1. redo last command but as root
