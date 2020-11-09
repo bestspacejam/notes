@@ -1,14 +1,9 @@
-# Как достать закрытые свойства из объекта
+# PHP
 
-С помощью компонентов:
+## Как достать закрытые свойства из объекта
 
-* [Roave / BetterReflection](https://github.com/Roave/BetterReflection)
-* [Ocramius / GeneratedHydrator](https://github.com/Ocramius/GeneratedHydrator)
-* [Symfony / The PropertyAccess Component](https://symfony.com/doc/current/components/property_access.html)
+### [Closure Binding](https://secure.php.net/manual/ru/class.closure.php)
 
-С помощью [Closure Binding](https://secure.php.net/manual/ru/class.closure.php):
-
-http://sandbox.onlinephpfunctions.com/code/d22589ae24a3f002125536ff876140a3e1f7309c
 ```php
 <?php
 class WithPrivateProp
@@ -31,8 +26,8 @@ var_dump($a->prop());
  
 var_dump($a->prop());
 ```
+http://sandbox.onlinephpfunctions.com/code/d22589ae24a3f002125536ff876140a3e1f7309c
 
-http://sandbox.onlinephpfunctions.com/code/eee6987d398f4e731d60611bff622da99dd76329
 ```php
 <?php
 class WithPrivateProp
@@ -50,3 +45,10 @@ $haha = \Closure::bind(function ($foo, $prop) {return $foo->$prop; }, null, With
 
 echo $haha($foo, 'prop');
 ```
+http://sandbox.onlinephpfunctions.com/code/eee6987d398f4e731d60611bff622da99dd76329
+
+### Компоненты для доступа к закрытым свойствам
+
+* [Roave / BetterReflection](https://github.com/Roave/BetterReflection)
+* [Ocramius / GeneratedHydrator](https://github.com/Ocramius/GeneratedHydrator)
+* [Symfony / The PropertyAccess Component](https://symfony.com/doc/current/components/property_access.html)
