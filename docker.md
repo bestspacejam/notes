@@ -1,6 +1,10 @@
 # Docker
 
-## Cписок брошенных образов
+## Удаление всех повисших образов
+
+Образы оставшиеся после сборки нового образа с именем которое уже использовалось до этого
+
 ```shell
-docker images --filter=dangling=true
+docker images --quiet --filter="dangling=true" | xargs --no-run-if-empty docker rmi
+docker image prune --force
 ```
