@@ -59,6 +59,9 @@ tr -cd "[:print:]\n" < file1
 
 # 18. Получить имя исполняемого файла без вызова basename
 echo "${0##*/}"
+
+# Массовое переименование файлов
+find ./files -name '*.md' -print0 | sed -z 'p;s/md$/mdx/' | xargs -0 -rn2 mv --
 ```
 
 #### Ссылки
