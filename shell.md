@@ -1,6 +1,4 @@
-# Консоль
-
-### Полезные команды
+# Коммандная строка
 
 ```shell
 # 1. redo last command but as root
@@ -61,7 +59,7 @@ tr -cd "[:print:]\n" < file1
 echo "${0##*/}"
 
 # Массовое переименование файлов
-find ./files -name '*.md' -print0 | sed -z 'p;s/md$/mdx/' | xargs -0 -rn2 mv --
+find ./files -name '*.md' -print0 | sed -z 'p;s/md$/mdx/' | xargs -0rn2 mv --
 ```
 
 #### Ссылки
