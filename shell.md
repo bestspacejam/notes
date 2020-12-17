@@ -63,6 +63,9 @@ find ./files -name '*.md' -print0 | sed -z 'p;s/md$/mdx/' | xargs -0rn2 mv --
 
 # Получить время выполнения процессов с указанным именем
 ps -o time= -C chrome
+
+# Показать строки содержащиеся только в file2.txt
+comm -13 <(sort -u file1.txt) <(sort -u file2.txt)
 ```
 
 #### Ссылки
