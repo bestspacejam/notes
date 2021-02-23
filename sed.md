@@ -24,11 +24,7 @@ sed '1s/^\xEF\xBB\xBF//'
 ## Объединение мягких переносов строк
 
 ```shell
-sed ':x; /=$/{N;bx}; s/=\n//g' jaques.txt
-```
-
-### jaques.txt
-```
+sed ':x; /=$/{N;bx}; s/=\n//g' <<'EOL'
 All the wor=
 ld's a stag=
 e,
@@ -44,4 +40,5 @@ And one man=
  in his tim=
 e plays man=
 y parts.
+EOL
 ```
