@@ -66,6 +66,12 @@ ps -o time= -C chrome
 
 # Показать строки содержащиеся только в file2.txt
 comm -13 <(sort -u file1.txt) <(sort -u file2.txt)
+
+# Удаление файлов изменёных более суток назад
+find . -type f -mtime +1 -delete 2> /dev/null
+
+# Размер содержимого по каждому из подразделов
+du -sh ./*
 ```
 
 #### Ссылки
@@ -188,4 +194,7 @@ xargs -a params.txt -n1 -d$'\n' printf '{%s}\n'
 # Имена файлов могут содержать символы переноса строк, поэтому
 # для команды find лучше использовать параметр -print0
 find / -maxdepth 1 -print0 | xargs -0 -n1 printf '{%s}\n'
+
+# Удаление файлов изменённых более суток назад
+find . -type f -mtime +1 -print0 | xargs -0 rm -f
 ```
