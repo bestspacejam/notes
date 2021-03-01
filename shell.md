@@ -83,6 +83,9 @@ chmod -R u=rw,go=r,a+X ./dirname
 # tac | tac нужен для полной загрузки содержимого страницы и передачи в grep
 # Описание проблемы: https://stackoverflow.com/a/28879552/9215292
 curl "url" | tac | tac | grep -qs foo
+
+# Получить http статус сайта
+curl -LsI -o /dev/null -w '%{http_code}\n' 'url'
 ```
 
 #### Ссылки
