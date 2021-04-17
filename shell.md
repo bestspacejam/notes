@@ -86,6 +86,9 @@ curl "url" | tac | tac | grep -qs foo
 
 # Получить http статус сайта
 curl -LsI -o /dev/null -w '%{http_code}\n' 'url'
+
+# Удалить из файла все строки, кроме 100 последних
+tail -n100 access.log | sponge access.log
 ```
 
 #### Ссылки
