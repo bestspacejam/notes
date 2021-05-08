@@ -98,6 +98,18 @@ read -n1 -s -p $'Press any key to continue...\n'
 * [8 super heroic Linux commands that you probably aren't using](https://www.youtube.com/watch?v=Zuwa8zlfXSY)
 * [Removing all special characters from a string in Bash](https://stackoverflow.com/questions/36926999/removing-all-special-characters-from-a-string-in-bash)
 
+
+### Копирование файлов .php в структуру директорий PSR-4
+
+```shell
+grep -PorH --include='*.php' '^namespace \K[^;]+' ./src \
+| sed 's/\\/\//g' \
+| while IFS=':' read -r file path; do
+    mkdir -p -- "./dst/${path}"
+    cp -- "${file}" "${_}/"
+  done
+```
+
 ### Навигация в консоли
 
 ```shell
