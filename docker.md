@@ -96,3 +96,11 @@ docker run \
   -e "DOCKER_TLS_CERTDIR=" \
   docker:19 version
 ```
+
+
+## Volume
+
+```shell
+# Автоматически созданные, неиспользуемые хранилища
+docker volume ls -q -f "dangling=true" | grep -E '^[a-f0-9]{64}$'
+```
