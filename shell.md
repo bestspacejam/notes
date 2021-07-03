@@ -92,6 +92,9 @@ tail -n100 access.log | sponge access.log
 
 # Ожидать нажатия любой клавиши
 read -n1 -s -p $'Press any key to continue...\n'
+
+# Проверка на конец месяца
+test $(date -d tomorrow +%-d) -eq 1 && echo "today end of the month"
 ```
 
 #### Ссылки
