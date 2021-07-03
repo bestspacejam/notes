@@ -2,12 +2,19 @@
 
 ## Удаление всех повисших образов
 
-Образы оставшиеся после сборки нового образа с тем же именем
+*Повисшие образы* - это образы оставшиеся после сборки нового образа с тем же именем.
 
 ```shell
 docker images --quiet --filter="dangling=true" | xargs --no-run-if-empty docker rmi
 docker image prune --force
 ```
+
+## Список загруженных репозиториев образов
+
+```shell
+docker images --format "{{.Repository}}" | sort -u
+```
+
 
 ## MySQL
 
