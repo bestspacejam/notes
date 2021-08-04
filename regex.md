@@ -101,6 +101,15 @@
 /[\s\S]+/  0.70s
 ```
 
+## Глаголы управления бэктрекингом
+
+- `(*SKIP)` - удаляет все состояния и начинает поиск с позиции в которой он размещён
+- `(*PRUNE)` - удаляет все состояния и начинает поиск с новой позиции (позиции следующей за начальной)
+
+### Ссылки:
+[Backtracking Control Verbs](http://www.rexegg.com/backtracking-control-verbs.html)
+
+
 ## Ссылки
 
 [Best of Fluent 2012: /Reg(exp){2}lained/: Demystifying Regular Expressions](https://www.youtube.com/watch?v=EkluES9Rvak) - видео с конференции
