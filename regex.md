@@ -106,10 +106,10 @@
 - `(*SKIP)` - удаляет все состояния и начинает поиск с позиции в которой он размещён
 - `(*PRUNE)` - удаляет все состояния и начинает поиск с новой позиции (позиции следующей за начальной)
 
-### Ссылки:
-[Backtracking Control Verbs](http://www.rexegg.com/backtracking-control-verbs.html)
+### Ссылки
+- [Backtracking Control Verbs](http://www.rexegg.com/backtracking-control-verbs.html)
 
 
-## Ссылки
+## Ресурсы и материалы
 
-[Best of Fluent 2012: /Reg(exp){2}lained/: Demystifying Regular Expressions](https://www.youtube.com/watch?v=EkluES9Rvak) - видео с конференции
+- [Best of Fluent 2012: /Reg(exp){2}lained/: Demystifying Regular Expressions](https://www.youtube.com/watch?v=EkluES9Rvak) - видео с конференции
