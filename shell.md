@@ -244,3 +244,11 @@ find / -maxdepth 1 -print0 | xargs -0 -n1 printf '{%s}\n'
 # Удаление файлов изменённых более суток назад
 find . -type f -mtime +1 -print0 | xargs -0 rm -f
 ```
+
+### Экранирование и удаление экранирования строк
+
+```
+$ bash -c "$@" "printf '%s' $(printf '%q' $'new\nline.txt')"
+new
+line.txt
+```
