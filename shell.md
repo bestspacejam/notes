@@ -1,5 +1,7 @@
 # Коммандная строка
 
+## Интересные команды
+
 ```shell
 # 1. redo last command but as root
 sudo !!
@@ -80,7 +82,7 @@ sudo chattr -i file.txt
 chmod -R u=rw,go=r,a+X ./dirname
 
 # Проверить страницу на содержимое
-# tac | tac нужен для полной загрузки содержимого страницы и передачи в grep
+# "tac | tac" нужен для полной загрузки содержимого страницы и передачи в grep
 # Описание проблемы: https://stackoverflow.com/a/28879552/9215292
 curl "url" | tac | tac | grep -qs foo
 
@@ -102,7 +104,7 @@ test $(date -d tomorrow +%-d) -eq 1 && echo "today end of the month"
 * [Removing all special characters from a string in Bash](https://stackoverflow.com/questions/36926999/removing-all-special-characters-from-a-string-in-bash)
 
 
-### Копирование файлов .php в структуру директорий PSR-4
+### Копирование файлов `.php` в структуру директорий PSR-4
 
 ```shell
 grep -PorH --include='*.php' '^namespace \K[^;]+' ./src \
@@ -111,6 +113,31 @@ grep -PorH --include='*.php' '^namespace \K[^;]+' ./src \
     mkdir -p -- "./dst/${path}"
     cp -- "${file}" "${_}/"
   done
+```
+
+### Экранирование и удаление экранирования строк
+
+```
+$ bash -c "$@" "printf '%s' $(printf '%q' $'new\nline.txt')"
+new
+line.txt
+```
+
+### Подсчёт количества страниц в PDF
+
+#### Через Ghostscript
+
+```shell
+gs \
+  -dQUIET \
+  -dNODISPLAY \
+  -c "(file.pdf) (r) file runpdfbegin pdfpagecount = quit"
+```
+
+#### Через pdfinfo (poppler-utils)
+
+```shell
+pdfinfo "$1" | awk '$1=="Pages:" {print $2; exit}'
 ```
 
 ### Навигация в консоли
@@ -132,7 +159,6 @@ $PWD - путь до текущей директории
 $OLDPWD - путь до предыдущей директории 
 ```
 
-
 ### Использование DEBUG trap для отладки скрипта
 
 ```shell
@@ -142,7 +168,6 @@ echo $((var+2))
 ```
 
 ### Склеивание массива в строку и разделение на слова
-
 
 ```shell
 IFS="| "
@@ -243,12 +268,4 @@ find / -maxdepth 1 -print0 | xargs -0 -n1 printf '{%s}\n'
 
 # Удаление файлов изменённых более суток назад
 find . -type f -mtime +1 -print0 | xargs -0 rm -f
-```
-
-### Экранирование и удаление экранирования строк
-
-```
-$ bash -c "$@" "printf '%s' $(printf '%q' $'new\nline.txt')"
-new
-line.txt
 ```
