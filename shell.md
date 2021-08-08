@@ -137,7 +137,7 @@ gs \
 #### Через pdfinfo (poppler-utils)
 
 ```shell
-pdfinfo "$1" | awk '$1=="Pages:" {print $2; exit}'
+pdfinfo "file.pdf" | awk '$1=="Pages:" {print $2; exit}'
 ```
 
 ### Навигация в консоли
