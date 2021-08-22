@@ -1,11 +1,17 @@
 # Монтирование файловой системы
 
-```shell
-# Монтирование тома
-mount -t ext4 /mnt/storage /dev/sdb1
+Файл `/etc/fstab` содержит инструкции для автоматического монтирования.
 
-# Монтирование с автоматическим определением файловой системы
-mount -a /mnt/storage /dev/sdb1
+```shell
+
+# Монтирование тома
+mount /dev/sdb1 /mnt/storage
+
+# Монтирование тома с явным указанием файловой системы
+mount -t ext4 /dev/sdb1 /mnt/storage
+
+# Монтирование всех файловых систем указанных в `/etc/fstab`
+mount -a
 
 # Монтирование ISO-образа
 mount -o loop image.iso /mnt/iso
@@ -20,7 +26,5 @@ cat /etc/mtab
 cat /proc/mounts
 ```
 
-Инструкции для автоматического монтирования содержатся в файле `/etc/fstab`
-
 ## Ссылки
-[File System Mounting - Linux](https://www.youtube.com/watch?v=A8ITr5ZpzvA) - видео
+- [File System Mounting - Linux](https://www.youtube.com/watch?v=A8ITr5ZpzvA) - видео
