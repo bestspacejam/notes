@@ -140,6 +140,12 @@ gs \
 pdfinfo "file.pdf" | awk '$1=="Pages:" {print $2; exit}'
 ```
 
+### Получение текстового содержимого с html-страницы
+
+```shell
+w3m -dump -cols 99999 example.ru
+```
+
 ### Навигация в консоли
 
 ```shell
