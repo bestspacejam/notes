@@ -59,3 +59,10 @@ $ seq 10 | sed -En 'h;n;G;y/\n/\t/;p'
 8       7
 10      9
 ```
+
+## Видео
+- [Understanding how sed works 1/4](https://www.youtube.com/watch?v=l0mKlIswojA)
+- [Understanding how sed works 2/4](https://www.youtube.com/watch?v=4vr8Aao0Mfo)
+- [Understanding how sed works 3/4](https://www.youtube.com/watch?v=P4ZcBrJ38I8)
+- [Understanding how sed works 4/4](https://www.youtube.com/watch?v=W95wrzAgdWk)
+
