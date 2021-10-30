@@ -26,5 +26,31 @@ cat /etc/mtab
 cat /proc/mounts
 ```
 
-## Ссылки
-- [File System Mounting - Linux](https://www.youtube.com/watch?v=A8ITr5ZpzvA) - видео
+### Отключение автоматического монтирования
+
+Если добавить `noauto` в опции `/etc/fstab` то диск не будет монтироваться автоматически, но при этом его можно будет смонтировать вручную с предустановленными параметрами (допустим `noatime`  или `ro`).
+
+```
+$ cat /etc/fstab
+UUID=f50c9c13-032b-44d3-82b0-4fffa249077c /mnt/backups  ext4    defaults,noatime        0       0
+
+$ mount /mnt/backups
+```
+
+То есть fstab по сути содержит информацию для монтирования устройств которые *могут быть* подключены, но не всегда доступны при загрузке системы. Это может быть съёмный носитель или сетевой ресурс
+
+
+
+## Информация о дисках
+
+```shell
+# Имена томов и их точки монтирования
+lsblk
+
+# Список UUID томов
+blkid
+```
+
+## Видео
+- [File System Mounting - Linux](https://www.youtube.com/watch?v=A8ITr5ZpzvA)
+- [Linux Essentials - Automatically mounting storage volumes with /etc/fstab](https://www.youtube.com/watch?v=A7xH74o6kY0&list=WL)
