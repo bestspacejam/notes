@@ -30,6 +30,6 @@ sudo gitlab-runner verify
 
 **Решение**
 
-В файле `config.toml` изменить параметр `concurrent` на *(число раннеров + 1)*. То есть если на серевере зарегистрированно три раннера, то указать `concurrent = 4`
+В файле `config.toml` изменить параметр `concurrent` на *(число раннеров)*. То есть если на серевере зарегистрированно три раннера, то указать `concurrent = 3`.
 
 Источник: [Job waiting (pending) for runner too long (#3616) · Issues · GitLab.org / gitlab-runner · GitLab](https://gitlab.com/gitlab-org/gitlab-runner/-/issues/3616)
