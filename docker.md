@@ -1,13 +1,21 @@
 # Docker
 
-## Удаление всех повисших образов
+## Удаление повисших образов
 
-*Повисшие образы* - это образы оставшиеся после сборки нового образа с тем же именем.
+**Повисшие образы* - это образы оставшиеся после сборки нового образа с тем же именем.
 
 ```shell
 docker images --quiet --filter="dangling=true" | xargs --no-run-if-empty docker rmi
 docker image prune --force
 ```
+
+## Удаление неиспользуемых хранилищ созданных автоматически
+
+```shell
+docker volume ls -q -f "dangling=true" | grep -E '^[[:xdigit:]]{64}$' | xargs --no-run-if-empty docker volume rm
+```
+
+
 
 ## Список загруженных репозиториев образов
 
@@ -102,12 +110,4 @@ docker run \
   --network dind-network \
   -e "DOCKER_TLS_CERTDIR=" \
   docker:19 version
-```
-
-
-## Volume
-
-```shell
-# Автоматически созданные, неиспользуемые хранилища
-docker volume ls -q -f "dangling=true" | grep -E '^[a-f0-9]{64}$'
 ```
