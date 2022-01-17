@@ -104,6 +104,24 @@ test $(date -d tomorrow +%-d) -eq 1 && echo "today end of the month"
 * [Removing all special characters from a string in Bash](https://stackoverflow.com/questions/36926999/removing-all-special-characters-from-a-string-in-bash)
 
 
+### Подсчёт повторяющихся строк в файле
+
+```shell
+# Функция
+sus () {
+  sort | uniq -c | sort -n "$@"
+}
+
+# Алиас
+alias sus='sort | uniq -c | sort -n'
+```
+
+Пример использования:
+```shell
+cut -d ' ' -f6- /var/log/syslog | sus -r | less
+```
+
+
 ### Копирование файлов `.php` в структуру директорий PSR-4
 
 ```shell
