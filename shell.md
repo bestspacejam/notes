@@ -97,6 +97,9 @@ read -n1 -s -p $'Press any key to continue...\n'
 
 # Проверка на конец месяца
 test $(date -d tomorrow +%-d) -eq 1 && echo "today end of the month"
+
+# Повторить символ 60 раз
+printf '%*s\n' 60 | tr ' ' '='
 ```
 
 #### Ссылки
@@ -293,3 +296,19 @@ find / -maxdepth 1 -print0 | xargs -0 -n1 printf '{%s}\n'
 # Удаление файлов изменённых более суток назад
 find . -type f -mtime +1 -print0 | xargs -0 rm -f
 ```
+
+## printf
+
+### Дополнение длины и обрезка строки
+```
+$ printf '|%*.*s|\n' 4 2 123
+|  12|
+
+$ printf '|%4.2s|\n' 123
+|  12|
+```
+Звёздочка (`*`) в формате означает, что значение придёт из аргумента.
+
+### Ссылки
+* [printf — Википедия](https://ru.wikipedia.org/wiki/Printf)
+* [printf format string - Wikipedia](https://en.wikipedia.org/wiki/Printf_format_string)
