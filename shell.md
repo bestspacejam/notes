@@ -228,6 +228,9 @@ test $(date -d tomorrow +%-d) -eq 1 && echo "today end of the month"
 # Повторить символ 60 раз
 printf '%*s\n' 60 | tr ' ' '='
 tr '\0' '=' </dev/zero | head -c60 | xargs
+
+# Список процессов использующих указанный путь
+lsof | grep /mnt/path
 ```
 
 #### Ссылки
