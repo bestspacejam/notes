@@ -350,3 +350,21 @@ printf " <%s>" ${list[*]}; echo;
 - https://bash.cyberciti.biz/guide/$IFS
 
 
+### Удаление переносов строк из имён файлов
+
+```shell
+# (медленно)
+find . -type f -name $'*\n*' -print0 | while IFS= read -rd '' file; do mv "$file" "$(printf %s "$file" | tr -d '\n')"; done;
+
+# (быстро)
+find . -type f -name $'*\n*' -exec sh -c 'mv "$1" "$(printf %s "$1" | tr -d "\n")"' sh "{}" \;
+
+# (очень медленно)
+find . -type f -name $'*\n*' -exec rename -v 's/\n//g' "{}" \;
+
+# (очень быстро)
+find . -type f -name $'*\n*' -print0 | rename -v -0 's/\n//g'
+```
+
+**Примечание:**
+Если перенос строки содержится также и в имени директории, в которой лежит файл, то данные решения не сработают.
