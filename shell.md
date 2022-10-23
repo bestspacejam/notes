@@ -240,25 +240,19 @@ lsof | grep /mnt/path
 
 ### Подсчёт повторяющихся строк в файле
 
-```shell
-# Функция
-sus () {
-  sort | uniq -c | sort -n "$@"
-}
-
-# Алиас
+```bash
 alias sus='sort | uniq -c | sort -n'
 ```
 
 Пример использования:
-```shell
+```bash
 cut -d ' ' -f6- /var/log/syslog | sus -r | less
 ```
 
 
 ### Копирование файлов `.php` в структуру директорий PSR-4
 
-```shell
+```bash
 grep -PorH --include='*.php' '^namespace \K[^;]+' ./src \
 | sed 's/\\/\//g' \
 | while IFS=':' read -r file path; do
@@ -279,7 +273,7 @@ line.txt
 
 #### Через Ghostscript
 
-```shell
+```bash
 gs \
   -dQUIET \
   -dNODISPLAY \
@@ -288,19 +282,19 @@ gs \
 
 #### Через pdfinfo (poppler-utils)
 
-```shell
+```bash
 pdfinfo "file.pdf" | awk '$1=="Pages:" {print $2; exit}'
 ```
 
 ### Получение текстового содержимого web-страницы
 
-```shell
+```bash
 w3m -dump -cols 99999 example.ru
 ```
 
 ### Навигация в консоли
 
-```shell
+```bash
 # Перейти в домашнюю директорию
 cd
 cd ~
@@ -319,7 +313,7 @@ $OLDPWD - путь до предыдущей директории
 
 ### Использование DEBUG trap для отладки скрипта
 
-```shell
+```bash
 trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
 var=2
 echo $((var+2))
@@ -327,7 +321,7 @@ echo $((var+2))
 
 ### Склеивание массива в строку и разделение на слова
 
-```shell
+```bash
 IFS="| "
 list=(one "two three" four)
 
@@ -352,9 +346,12 @@ printf " <%s>" ${list[*]}; echo;
 
 ### Удаление переносов строк из имён файлов
 
-```shell
+```bash
 # (медленно)
-find . -type f -name $'*\n*' -print0 | while IFS= read -rd '' file; do mv "$file" "$(printf %s "$file" | tr -d '\n')"; done;
+find . -type f -name $'*\n*' -print0 \
+| while IFS= read -rd '' file; do
+    mv "$file" "$(printf %s "$file" | tr -d '\n')"
+  done
 
 # (быстро)
 find . -type f -name $'*\n*' -exec sh -c 'mv "$1" "$(printf %s "$1" | tr -d "\n")"' sh "{}" \;
@@ -367,4 +364,5 @@ find . -type f -name $'*\n*' -print0 | rename -v -0 's/\n//g'
 ```
 
 **Примечание:**
+
 Если перенос строки содержится также и в имени директории, в которой лежит файл, то данные решения не сработают.
