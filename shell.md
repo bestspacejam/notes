@@ -366,3 +366,15 @@ find . -type f -name $'*\n*' -print0 | rename -v -0 's/\n//g'
 **Примечание:**
 
 Если перенос строки содержится также и в имени директории, в которой лежит файл, то данные решения не сработают.
+
+### Преобразование простого списка в JSON
+
+```bash
+column \
+  --separator=':' \
+  --table \
+  --table-columns='login,password,uid,gid,gecos,home,shell' \
+  --table-name='users'\
+  --json \
+  /etc/passwd
+```
