@@ -5,7 +5,7 @@
 gpg --full-generate-key
 
 # Получение списка ключей
-gpg --list-secret-keys
+gpg --list-secret-keys --keyid-format=long
 
 # Создание подписанного файла
 gpg --sign test.txt
