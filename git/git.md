@@ -1,8 +1,6 @@
 # Git
 
-## Работа с ветками
-
-### Примеры команд
+### Работа с ветками
 
 ```shell
 # Список всех веток
@@ -16,32 +14,25 @@ git checkout -b master
 
 # Установить upstream-ветку для master
 git branch -u origin/BRANCH
+
+# Скопировать файл из ветки master в текущую
+git checkout master -- path/to/file.txt
 ```
 
-### Изменение имени локальной и удаленной ветки
+#### Как переименовать ветку на сервере
 
 ```shell
-git branch -m old_branch new_branch         # Rename branch locally    
-git push origin :old_branch                 # Delete the old branch    
-git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
+# Переименовать ветку локально
+git branch -m old_branch new_branch
+
+# Удалить старую ветку на сервере
+git push origin :old_branch
+
+# Вытолкнуть новую ветку на сервер
+git push --set-upstream origin new_branch
 ```
 
-Источник: https://gist.github.com/lttlrck/9628955
-
-### Копирование файлов из ветки в текущую
-
-```shell
-git checkout adminpanel
-git checkout master -- 'public'
-git commit -m "Скопированы файлы из ветки master"
-```
-
-Статья: [Quick tip: git-checkout specific files from another branch](http://nicolasgallagher.com/git-checkout-specific-files-from-another-branch/)
-
-
-## Обзор изменений
-
-### Примеры команд
+### Diff
 
 ```shell
 # Показать изменения которые ещё не добавлены в индекс (не поставлены в коммит)
@@ -57,18 +48,30 @@ git diff --staged
 git diff HEAD
 ```
 
-### Создание заплатки
+#### Ссылки про diff
 
-Сгенерировать заплатку на основе разницы между двумя коммитами и применить её.
+- [Difference between git HEAD and the current project state?](https://stackoverflow.com/questions/3293607/difference-between-git-head-and-the-current-project-state)
 
+### Log
 
+```shell
+# Выгрузить коммиты за вчерашний день
+git log --no-merges --since=yesterday.0:00 --before=yesterday.23:59:59
+
+# Разбить на поля символом табуляции
+git log --pretty='format:%H%x09%an%x09%s'
+
+# Задать формат даты
+git log -n1 --pretty='format:%cd' --date='format:%Y-%m-%d %H:%M:%S'
 ```
+
+### Заплатки
+
+```shell
+# Сгенерировать заплатку на основе разницы между двумя коммитами
 git diff <old_commmit> <new_commit> > my.patch
 git apply my.patch
 ```
 
-Ещё можно сделать `git cherry-pick -n <other_commit>`.
+Ещё можно сделать: `git cherry-pick -n <other_commit>`.
 
-### Ссылки
-
-[Difference between git HEAD and the current project state?](https://stackoverflow.com/questions/3293607/difference-between-git-head-and-the-current-project-state)
