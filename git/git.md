@@ -75,3 +75,12 @@ git apply my.patch
 
 Ещё можно сделать: `git cherry-pick -n <other_commit>`.
 
+### Информация об индексе и рабочем каталоге
+
+```shell
+# Список неотслеживаемых файлов / директорий
+git ls-files --exclude-standard --others --directory --no-empty-directory
+
+# Список изменённых файлов
+git ls-files --exclude-standard --modified
+```
