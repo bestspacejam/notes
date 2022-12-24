@@ -370,7 +370,7 @@ find . -type f -name $'*\n*' -print0 | rename -v -0 's/\n//g'
 
 Если перенос строки содержится также и в имени директории, в которой лежит файл, то данные решения не сработают.
 
-### Преобразование простого списка в JSON
+### Преобразование простого списка в JSON (`column`)
 
 ```bash
 column \
@@ -380,4 +380,19 @@ column \
   --table-name='users'\
   --json \
   /etc/passwd
+```
+
+
+### Запись взаимодействия с терминалом (`script`)
+
+```shell
+# Запись терминальной сессии
+script script.log
+
+# Выполнение и запись финального результата вывода комманды
+script -c 'top' top.log
+
+# Запись с временными метками 
+script script.log -t=time.log
+scriptreplay -s script.log --timing=time.log
 ```
