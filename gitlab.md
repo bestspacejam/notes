@@ -18,6 +18,20 @@ sudo gitlab-runner list
 sudo gitlab-runner verify
 ```
 
+### Запуск из образа
+
+```shell
+docker run --rm \
+    --name gitlab-runner \
+    -u "$(id -u):$(getent group docker | cut -d: -f3)" \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v "$PWD/config.toml:/etc/gitlab-runner/config.toml" \
+    -v "$PWD:$PWD" \
+    -w "$PWD" \
+    gitlab/gitlab-runner \
+    exec docker --docker-privileged build
+```
+
 ### Проблемы и решения
 
 **Проблема**
