@@ -1,12 +1,12 @@
 # Sed
 
-## Вывод нескольких первых строк
+### Вывод нескольких первых строк
 
 ```shell
 sed 7q
 ```
 
-## Вывод первой и последней строки
+### Вывод первой и последней строки
 
 ```shell
 sed '1b;$!d'
@@ -14,14 +14,14 @@ sed -n '1p;n;$p'
 ```
 
 
-## Удаление BOM
+### Удаление BOM
 
 ```shell
 sed '1s/^\xEF\xBB\xBF//'
 ```
 
 
-## Объединение мягких переносов строк
+### Объединение мягких переносов строк
 
 ```shell
 sed ':x; /=$/{N;bx}; s/=\n//g' <<'EOL'
@@ -49,7 +49,7 @@ EOL
 sed -E 's/^(\/([^\/]+))+$/\0\t\2/'
 ```
 
-### Создать таблицу из чередующихся строк 
+### Создание таблицы из чередующихся строк 
 
 ```
 $ seq 10 | sed -En 'h;n;G;y/\n/\t/;p'
@@ -60,7 +60,13 @@ $ seq 10 | sed -En 'h;n;G;y/\n/\t/;p'
 10      9
 ```
 
-## Видео
+### Удаление конечных символов `\r` из файла
+
+```shell
+sed -i 's/\r$//' filename
+```
+
+### Видео
 - [Understanding how sed works 1/4](https://www.youtube.com/watch?v=l0mKlIswojA)
 - [Understanding how sed works 2/4](https://www.youtube.com/watch?v=4vr8Aao0Mfo)
 - [Understanding how sed works 3/4](https://www.youtube.com/watch?v=P4ZcBrJ38I8)
