@@ -130,61 +130,68 @@ $_ - Последний параметр предыдущей команды
 ## Интересные команды
 
 ```shell
-# 1. redo last command but as root
+# Выполнить предыдущую команду как суперпользователь
 sudo !!
 
-# 2. open an editor to run a command
+# Открыть редактор для ввода комманды
 ctrl+x+e
 
-# 3. create a super fast ram disk
+# Открыть редактор для изменения и выполнения предыдущей комманды
+fc
+
+# Не сохранять команду в историю (пробел перед командой)
+ ls -l
+
+# Выполнить команду игноририруя алиас
+\ls
+
+# Выполнить команду игнорируя алиасы и объявленные функции
+# (будут использоваться только пути поиска указанные в $PATH)
+command ls
+
+# Созать быстрый RAM-диск
 mkdir -p /mnt/ram
 mount -t tmpfs tmpfs /mnt/ram -o size=8192M
 
-# 4. don't add command to history (note the leading space)
- ls -l
-
-# 5. fix a really long command that you messed up
-fc
-
-# 6. tunnel with ssh (local port 3337 -> remote host's 127.0.0.1 on port 6379)
+# tunnel with ssh (local port 3337 -> remote host's 127.0.0.1 on port 6379)
 ssh -L 3337:127.0.0.1:6379 root@emkc.org -N
 
-# 7. quickly create folders
+# Создать несколько вложенных директорий
 mkdir -p folder/{sub1,sub2}/{sub1,sub2,sub3}
 
-# 8. intercept stdout and log to file
+# intercept stdout and log to file
 cat file | tee -a log | cat > /dev/null
 
-# 9. exit terminal but leave all processes running
+# Выйти из терминала, но оставить все процессы запущенными
 disown -a && exit
 
-# 10. Отсортировать лог-файл по содержимому строки
+# Отсортировать лог-файл по содержимому строки
 paste -d' ' <(grep -o -E 'Time:[^,]+' performance.log | cut -d' ' -f2-) performance.log | sort -h
 
-# 11. Вывести содержимое файла без закомментированных строк
+# Вывести содержимое файла без закомментированных строк
 grep -v "^$\|^#" /etc/dnsmasq.conf
 
-# 12. Вывести список всех используемых ДНС серверов
+# Вывести список всех используемых ДНС серверов
 nmcli dev show | awk '$1 ~ /DNS/ {print $2}'
 
-# 13. Создать и перейти во временную директорию
-cd "$(mktemp -d)"
+# Создать временную директорию и перейти в неё
+cd -- "$(mktemp -d)"
 
-# 14. Проверить, что `stdin` команды открыт не в терминале
+# Проверить, что `stdin` команды открыт не в терминале
 { [ ! -t 0 ] && cat; } <<< redirection
 
-# 15. Вывести строку с поддержкой специальных символов
+# Вывести строку с поддержкой специальных символов
 echo -n $'one\ntwo\nthree'
 echo -n -e "one\ntwo\nthree"
 printf '%b' "one\ntwo\nthree"
 
-# 16. Вызвать команду для каждого переданного аргумента
+# Вызвать команду для каждого переданного аргумента
 printf '%s\0' "$@" | xargs -0n1 printf '{%s}\n'
 
-# 17. Очистка содержимого от непечатаемых символов
+# Очистка содержимого от непечатаемых символов
 tr -cd "[:print:]\n" < file1
 
-# 18. Получить имя исполняемого файла без вызова basename
+# Получить имя исполняемого файла без вызова basename
 echo "${0##*/}"
 
 # Массовое переименование файлов
@@ -199,7 +206,7 @@ comm -13 <(sort -u file1.txt) <(sort -u file2.txt)
 # Удаление файлов изменёных более суток назад
 find . -type f -mtime +1 -delete 2> /dev/null
 
-# Размер содержимого по каждому из подразделов
+# Вывести размер содержимого по каждому из подразделов
 du -sh ./*
 
 # Сделать файл неизменяемым
@@ -234,6 +241,9 @@ lsof | grep /mnt/path
 
 # Убрать начальную директорию из вывода find
 find -type f -printf '%P\n'
+
+# Список объявленных функций (в рамках текущей подоболочки/скрипта)
+declare -F | cut -d' ' -f3
 ```
 
 #### Ссылки
