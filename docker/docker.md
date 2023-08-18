@@ -111,3 +111,32 @@ docker run \
   -e "DOCKER_TLS_CERTDIR=" \
   docker:19 version
 ```
+
+
+## Настройка Docker-сервера
+
+### Увеличение количества создаваемых сетей
+
+По-умолчанию докер через `docker network create` даёт создать не более 30 сетей.
+Для того чтобы расширить данное ограничение до **255** необходимо в файле `/etc/docker/daemon.json` указать дополнительную подсеть:
+
+```json
+{
+   "default-address-pools": [
+        {
+            "base":"172.17.0.0/12",
+            "size":16
+        },
+        {
+            "base":"192.168.0.0/16",
+            "size":20
+        },
+        {
+            "base":"10.99.0.0/16",
+            "size":24
+        }
+    ]
+}
+```
+
+Решение: [How to increase maximum Docker Network on one server? - Stack Overflow](https://stackoverflow.com/questions/41609998/how-to-increase-maximum-docker-network-on-one-server)
