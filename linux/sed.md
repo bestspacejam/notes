@@ -66,6 +66,12 @@ $ seq 10 | sed -En 'h;n;G;y/\n/\t/;p'
 sed -i 's/\r$//' filename
 ```
 
+### Удаление лишних пробелов и переносов строк
+
+```shell
+sed -Ez 's/^\s+//; s/\s+$//; s/\s+/ /g'
+```
+
 ### Видео
 - [Understanding how sed works 1/4](https://www.youtube.com/watch?v=l0mKlIswojA)
 - [Understanding how sed works 2/4](https://www.youtube.com/watch?v=4vr8Aao0Mfo)

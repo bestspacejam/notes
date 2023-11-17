@@ -15,14 +15,22 @@ docker image prune --force
 docker volume ls -q -f "dangling=true" | grep -E '^[[:xdigit:]]{64}$' | xargs --no-run-if-empty docker volume rm
 ```
 
-
-
 ## Список загруженных репозиториев образов
 
 ```shell
 docker images --format "{{.Repository}}" | sort -u
 ```
 
+## Копирование файлов из одного `volume` в другой
+```shell
+docker run --rm -ti -v FROM_VOLUME:/from -v TO_VOLUME:/to busybox cp -av /from/. /to
+```
+
+## Список содержимого `volume`
+
+```shell
+docker run --rm -ti -v VOLUME_NAME:/data -w /data busybox ls -la
+```
 
 ## MySQL
 

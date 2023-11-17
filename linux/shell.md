@@ -254,6 +254,9 @@ declare -F | cut -d' ' -f3
 
 # Повторить символ или строку N-раз
 yes = | head -n10 | tr -d '\n'
+
+# Список имён поддиректорий
+find -mindepth 1 -maxdepth 1 -type d -printf '%f\0'
 ```
 
 #### Ссылки
