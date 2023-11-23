@@ -1,6 +1,13 @@
-# Примеры использования Certbot
+# Certbot
+## Шпаргалка по командам
+```shell
+# Списиок сертификатов
+certbot certificates
 
-## Ручная генерация
+# Удаление сертификата
+certbot delete --cert-name domain-name.ru
+```
+## Ручная генерация сертификата
 
 Подтверждение владения доменом через HTTP-запрос:
 
@@ -12,10 +19,7 @@ certbot certonly \
   --email admin@example.com \
   --domains example.com
 ```
-
-
 ## Автоматическое получение сертификата 
-
 
 ```shell
 certbot certonly \
@@ -32,7 +36,6 @@ certbot certonly \
 
 Для Nginx можно подключить вот такую "ловушку":
 
-
 ```nginx
 location /.well-known/acme-challenge/ {
   root /var/www/html;
@@ -42,16 +45,9 @@ location /.well-known/acme-challenge/ {
 Сертификат сохраняется в директории `/etc/letsencrypt/archive/<domain>` и доступен через символическую ссылку из директории `/etc/letsencrypt/live/<domain>/cert.pem`)
 См. подробнее: [Where are my certificates?](https://certbot.eff.org/docs/using.html#where-are-my-certificates)
 
-
 ## Проверка генерации сертификата
 
 Можно использовать флаг `--test-cert` или `--dry-run` для проверки, без генерации файла сертификата.
-
-## Список сертификатов
-
-```shell
-certbot certificates
-```
 
 ## Генерация с помощью Docker контейнера
 
