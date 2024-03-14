@@ -75,6 +75,14 @@ docker exec CONTAINER /usr/bin/mysqldump -u root --password=root DATABASE > back
 cat backup.sql | docker exec -i CONTAINER /usr/bin/mysql -u root --password=root DATABASE
 ```
 
+Не обязательно выполнять копирование от пользователя `root`, можно завести пользователя с правами:
+
+- `SHOW DATABASES` - если надо вывести список БД
+- `SELECT`
+- `LOCK TABLES`
+- `RELOAD`
+- `SHOW VIEW`
+
 
 ### Физическое
 
