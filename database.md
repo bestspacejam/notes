@@ -14,26 +14,9 @@
 
 ## MySQL / MariaDB
 
-### Простейший экспорт / импорт дампа БД
-
-```shell
-# Экспортировать дамп в gzip-файл
-mysqldump -u user -p database | gzip > database.sql.gz
-
-# Импортировать дамп из gzip-файла
-gunzip < database.sql.gz | mysql -u user -p database
-
-# Экспорт из Docker-контейнера
-docker exec -i <mariadb_container> sh -c 'exec mysqldump -u<username> -p<password> <database_name> <table1> <table2>' |
- gzip > dump.sql.gz
-
-# Импорт в Docker-контейнер
-docker exec -i <container> mysql -u<username> <database> < metalog_views.sql
-```
-
 ### Сброс пароля для пользователя
 
-```
+```shell
 # Запустить mariadb с отключеной проверкой разрешений
 mysqld_safe --skip-grant-tables &
 
@@ -42,6 +25,7 @@ mysql
 ```
 
 В режиме командной строки:
+
 ```sql
 USE mysql;
 UPDATE user SET authentication_string=PASSWORD('password') WHERE User='root';
@@ -66,3 +50,51 @@ GRANT ALL ON *.* to 'root'@'%';
 ```sql
 SET PASSWORD FOR 'root'@'%'=PASSWORD('password');
 ```
+
+## Резервное копирование
+
+### Логическое
+
+**Простейший экспорт/импорт дампа**
+
+```shell
+# Экспортировать дамп в gzip-файл
+mysqldump -u user -p database | gzip > database.sql.gz
+
+# Импортировать дамп из gzip-файла
+gunzip < database.sql.gz | mysql -u user -p database
+```
+
+**Через докер-контейнер**
+
+```shell
+# Backup
+docker exec CONTAINER /usr/bin/mysqldump -u root --password=root DATABASE > backup.sql
+
+# Restore
+cat backup.sql | docker exec -i CONTAINER /usr/bin/mysql -u root --password=root DATABASE
+```
+
+
+### Физическое
+
+1. **Создание пользователя**
+
+```sql
+CREATE USER 'mariabackup'@'localhost' IDENTIFIED BY 'password';
+GRANT RELOAD, PROCESS, LOCK TABLES, BINLOG MONITOR ON *.* TO 'mariabackup'@'localhost';
+```
+
+2. **Копирование файлов базы данных**
+
+```shell
+mariabackup --backup \
+  --target-dir=/var/mariadb/backup/ \
+  --user=mariabackup --password=password
+```
+
+### Ссылки
+
+- [Mariabackup Overview](https://mariadb.com/kb/en/mariabackup-overview/#installing-on-linux)
+- [Full Backup and Restore with Mariabackup](https://mariadb.com/kb/en/full-backup-and-restore-with-mariabackup/)
+- [Container Backup and Restoration](https://mariadb.com/kb/en/container-backup-and-restoration/)
