@@ -260,6 +260,9 @@ find -mindepth 1 -maxdepth 1 -type d -printf '%f\0'
 
 # Удаление всех строк, кроме трёх последних
 seq 10 | head -n-3
+
+# Скачивание файла с игнорированием HSTS
+wget --hsts-file /dev/null http://example.ru/
 ```
 
 #### Ссылки
