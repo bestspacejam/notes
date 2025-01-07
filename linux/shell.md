@@ -263,6 +263,12 @@ seq 10 | head -n-3
 
 # Скачивание файла с игнорированием HSTS
 wget --hsts-file /dev/null http://example.ru/
+
+# Разрешение изображения
+mediainfo --Inform="Image;%Width%x%Height%" image.jpg
+
+# Разрешение изображения (ImageMagick)
+identify image.jpg | cut -d ' ' -f3
 ```
 
 #### Ссылки
