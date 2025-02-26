@@ -1,4 +1,6 @@
-# Проксирование в NGINX
+# NGINX
+
+## Проксирование в NGINX
 
 ```
 location /static/ {
@@ -17,7 +19,7 @@ location /static/ {
 **Важно:** Nginx при старте пытается резолвить все хосты `upstream`, и если какой-то из них не отвечает, то прокси-сервер не запускается.
 
 
-## Игнорирование разрешения имени при старте:
+### Игнорирование разрешения имени при старте:
 
 ```
 location /frontend/ {
@@ -41,11 +43,9 @@ location /frontend/ {
 - [Nginx with dynamic upstreams](https://tenzer.dk/nginx-with-dynamic-upstreams/)
 
 
+### Директива [proxy_pass](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)
 
-
-## Директива [proxy_pass](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)
-
-### Удалить `/static/` из оригинального запроса и добавить оставшуюся часть в конец проксируемого URI.  
+#### 1. Удалить `/static/` из оригинального запроса и добавить оставшуюся часть в конец проксируемого URI.  
 Пример: `/static/assets/style.css` -> `http://127.0.0.1/public/assets/style.css`
 
 ```
@@ -54,7 +54,7 @@ location /static/ {
 }
 ```
 
-### Добавить весь запрос в конец проксируемого URI
+#### 2. Добавить весь запрос в конец проксируемого URI
 В случае изменения оригинального запроса с помощью регулярных выражений передаётся изменёный запрос.  
 Пример: `/static/assets/style.css` -> `http://127.0.0.1/static/assets/style.css`
 
@@ -64,7 +64,7 @@ location /static/ {
 }
 ```
 
-### Добавить весь запрос в конец проксируемого URI
+#### 3. Добавить весь запрос в конец проксируемого URI
 Если вместо ip-адреса указать имя хоста, Nginx будет резолвить его не при старте, а только непосредственно при запросах.
 
 Это позволяет запустить сервер даже если хост в текущий момент недоступен.
@@ -77,7 +77,7 @@ location /static/ {
 }
 ```
 
-## Разрешение DNS имён при запуске внутри Docker-контейнера 
+### Разрешение DNS имён при запуске внутри Docker-контейнера 
 
 Docker использует для сервера имён адрес `127.0.0.11` 
 ```
@@ -86,7 +86,6 @@ location /frontend/ {
   proxy_pass http://frontend;
 }
 ```
-
 
 Для проксируемых хостов, заданных через указание имени хоста, nginx однократно вызывает системный резолвер при запуске сервера.
 ```
@@ -106,3 +105,14 @@ location /page {
 Вообще, все внешние ресуры лучше резолвить динамически, так как ресурс может изменить IP адрес, а реверс-прокси будет стучаться в тот который получил при запуске.
 
 Более продробное описание: [Nginx resolver explained](https://distinctplace.com/2017/04/19/nginx-resolver-explained/)
+
+## Перреадресация поддоменов на другой домен
+
+```nginx
+server_name ~^(?<subname>[^.]+)\.example\.ru$;
+return 301 $scheme://$subname.newdomain.ru$request_uri;
+```
+
+Справочные материалы: 
+- https://blog.nginx.org/blog/creating-nginx-rewrite-rules
+- https://nginx.org/en/docs/http/server_names.html
