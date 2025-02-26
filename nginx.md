@@ -106,7 +106,7 @@ location /page {
 
 Более продробное описание: [Nginx resolver explained](https://distinctplace.com/2017/04/19/nginx-resolver-explained/)
 
-## Перреадресация поддоменов на другой домен
+## Переадресация поддоменов на другой домен
 
 ```nginx
 server_name ~^(?<subname>[^.]+)\.example\.ru$;
