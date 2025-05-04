@@ -269,6 +269,13 @@ mediainfo --Inform="Image;%Width%x%Height%" image.jpg
 
 # Разрешение изображения (ImageMagick)
 identify image.jpg | cut -d ' ' -f3
+
+# Найти файлы размером более 1 мегабайта
+find -size +1M
+
+# Найти файлы размером менее 1 мегабайта
+find -size -1024k
+
 ```
 
 #### Ссылки
