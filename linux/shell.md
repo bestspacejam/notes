@@ -467,17 +467,3 @@ grep -h '' *
 grep -Rh '' ./
 ```
 
-### SSH
-
-Конфиг сервера: `/etc/ssh/sshd_config`
-
-```shell
- # Генерация приватного ключа
-ssh-keygen -t ed25519
-
-# Отправка публичного ключа на сервер
-ssh-copy-id <username>@<remote-host>
-
-# Подключение по SSH через запрос пароля
-ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no <username>@<remote-host>
-```
