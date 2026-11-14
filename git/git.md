@@ -91,3 +91,9 @@ git ls-files --exclude-standard --others --directory --no-empty-directory
 # Список изменённых файлов
 git ls-files --exclude-standard --modified
 ```
+
+### Отключение экранирования имен файлов при выводе `git status`
+
+```bash
+git config --global core.quotepath false
+```
